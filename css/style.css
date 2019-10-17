@@ -1,0 +1,144 @@
+html, body {
+    margin: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+body {
+    padding-top: 100px;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+button.learn-more {
+    width: 130px;
+    height: 45px;
+    background: #be3a34;
+    line-height: 45px;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .1px;
+}
+
+header {
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background: #be3a34;
+}
+
+.content {
+    max-width: 945px;
+    margin: auto;
+    width: 100%;
+}
+
+header .content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+header .menu {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .35px;
+    text-transform: uppercase;
+}
+
+header .menu .button {
+    cursor: pointer;
+}
+
+header .menu .button-line {
+    height: 3px;
+    background: white;
+    transition: left 0.5s ease-in-out, width 0.5s ease-in-out;
+    position: absolute;
+}
+
+header .search.button {
+    width: 48px;
+    height: 48px;
+    background-image: url('../assets/img/loupe.svg');
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+header .search.button:hover {
+    background-image: url('../assets/img/loupe_over.svg');
+}
+
+section.welcome {
+    height: 700px;
+    background: url('../assets/img/welcome_bg.jpg');
+    background-size: cover;
+    background-position: 50%;
+    position: relative;
+    padding-top: 135px;
+}
+
+.welcome .layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #03326c;
+    opacity: .35;
+    z-index: 1;
+}
+
+.welcome .intro {
+    width: 365px;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome .intro h1 {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 54px;
+}
+
+.welcome .intro p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.welcome .intro .title-line {
+    height: 3px;
+    background-color: #be3a34;
+    width: 120px;
+    margin: 20px 0;
+}
+
+
+
+
+
