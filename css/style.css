@@ -26,6 +26,7 @@ button.learn-more {
     font-weight: 700;
     font-size: 14px;
     letter-spacing: .1px;
+    cursor: pointer;
 }
 
 header {
