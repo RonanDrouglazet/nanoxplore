@@ -25,10 +25,12 @@
         <div class="menu-container">
           <div class="menu">
             <div class="button" data-menu="company">company</div>
-            <div class="button">products</div>
-            <div class="button">news</div>
+            <div class="button" data-menu="products">products</div>
+            <div class="button" data-menu="support">support</div>
+            <div class="button">sales</div>
+            <div class="button" data-menu="news">news</div>
             <div class="button">careers</div>
-            <div class="button">contact</div>
+            <div class="button" data-menu="contact">contact</div>
             <div class="button-line"></div>
           </div>
           <div class="button search"></div>
@@ -53,9 +55,86 @@
         </div>
       </div>
     </section>
-    <section>
+    <section class="company" data-menu="company">
+      <div class="content">
+        <h1>Corporate profile</h1>
+        <div class="title-line"></div>
+        <p>
+          NanoXplore is a privately owned fabless company based in France. The company was created in 2010 by three veterans of
+          semiconductor industry with long experience in the design, test and debugging of FPGA cores. NanoXplore is therefore a
+          leader in the design of large scale programmable logic arrays for state of the art FPGA cores.
 
+          The founders of NanoXplore were amongst the pioneers of custom FPGA based emulation systems and IP macros for embedded
+          FPGA cores. In 2000,they developed the first range of IP macros to provide programmable logic cores for System on Chip (SoC) designs. In
+          2006 they developed a new family of FPGA devices with 750K four-input LUTs implemented in a
+          65nm technology.
+        </p>
+        <button class="learn-more">learn more</button>
+      </div>
     </section>
+    <section class="products" data-menu="products">
+      <div class="content">
+        <h1>Products</h1>
+        <div class="title-line"></div>
+        <div class="products-container">
+          <div class="product">
+            <h2>Software tools</h2>
+            <p>
+              NanoXplore provides a design suite that supports all NanoXplore FPGA families.
+              NanoXplore design suite runs on Linux 64 bits operating systems. The supported distributions are RedHat Enterprise 6 & 7, Ubuntu LTS 14.04, 16.04 & 18.04 and Debian 9.
+            </p>
+            <button class="read-more">read more</button>
+          </div>
+          <div class="product">
+            <h2>RHBD FPGA, SoCs, eFPGA</h2>
+            <p>
+              NanoXplore has developed Radiation-Hardened By Design SRAM-based FPGA devices for use into systems operating in harsh
+              environments, such as Spaceborne and Airbone applications, as well as Military and High-Energy Physics subsystems.
+            </p>
+            <button class="read-more">read more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="news" data-menu="news">
+      <div class="content">
+        <h1>Latest news</h1>
+        <div class="title-line"></div>
+        <div class="news-container">
+          <div class="news">
+            <div class="little">
+              <div class="image"></div>
+              <div class="description">
+                <span>september 25, 2019</span>
+                <p>Ro comnima delestor am vent fuga</p>
+              </div>
+            </div>
+            <div class="little">
+              <div class="image"></div>
+              <div class="description">
+                <span>september 25, 2019</span>
+                <p>Ro comnima delestor am vent fuga</p>
+              </div>
+            </div>
+            <div class="little">
+              <div class="image"></div>
+              <div class="description">
+                <span>september 25, 2019</span>
+                <p>Ro comnima delestor am vent fuga</p>
+              </div>
+            </div>
+          </div>
+          <div class="news big">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer data-menu="contact">
+      <div class="content">
+
+      </div>
+    </footer>
   </main>
 </body>
 

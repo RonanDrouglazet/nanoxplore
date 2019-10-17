@@ -13,18 +13,27 @@ let timeoutPosition
 const initMenu = () => {
 
     const observer = new IntersectionObserver(entries => {
-        setButtonLineRect(currentPosition = getMenuButtonFromSection(entries[0].target).getBoundingClientRect())
-    }, {threshold: 0.25})
+        entries.filter(entry => entry.isIntersecting).forEach(entry => {
+            console.log(entry.target)
+            currentPosition = () => getMenuButtonFromSection(entry.target).getBoundingClientRect()
+            setButtonLineRect(currentPosition())
+        })
+    }, {threshold: 0.5})
 
-    observer.observe(document.querySelector('section'))
+    document.querySelectorAll('section').forEach(section => observer.observe(section))
+    observer.observe(document.querySelector('footer'))
 
     $('.menu .button').hover(function() {
         clearTimeout(timeoutPosition)
         setButtonLineRect(this.getBoundingClientRect())
-    }, () => { timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition), 500) })
+    }, () => { timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 500) })
+
+    $(window).on('resize', () => {
+        clearTimeout(timeoutPosition)
+        timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 1)
+    })
 }
 
 $(window).ready(() => {
-
     initMenu()
 })
