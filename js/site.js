@@ -14,7 +14,6 @@ const initMenu = () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.filter(entry => entry.isIntersecting).forEach(entry => {
-            console.log(entry.target)
             currentPosition = () => getMenuButtonFromSection(entry.target).getBoundingClientRect()
             setButtonLineRect(currentPosition())
         })

@@ -221,7 +221,7 @@ section.products .title-line {
 }
 
 section.news {
-    height: 650px;
+    height: 700px;
     text-align: center;
 }
 
@@ -231,8 +231,9 @@ section.news {
 
 .news .news-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
+    padding-top: 50px;
 }
 
 .news .news-container > div.news {
@@ -241,23 +242,97 @@ section.news {
 
 .news .little {
     height: 33%;
-    width: 100%;
-    padding: 3% 0;
+    width: 85%;
+    padding: 5% 0;
     display: flex;
     align-items: center;
+}
+
+.news .little:first-child {
+    padding: 0 0 5% 0;
 }
 
 .news .little .image {
     width: 100px;
     height: 100px;
     background: black;
+    background-size: cover;
+    background-position: 50%;
 }
 
 .news .little:not(:first-child) {
-    border-top: 1px solid #bbbbbb;
+    border-top: 1px solid #e6e6e6;
+}
+
+.news .description {
+    text-align: left;
+    padding-left: 20px;
+    width: 65%;
+}
+
+.news .description span {
+    font-size: 14px;
+    font-weight: 700;
+    color:#979797;
+}
+
+.news .description p {
+    color:#be3a34;
+    font-size: 21px;
+    line-height: 24px;
+    letter-spacing: .1px;
+}
+
+.news.big .image {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.news.big .image img {
+    width: 90%;
+}
+
+.news.big .description {
+    padding-left: 0;
 }
 
 footer {
+    padding-top: 50px;
     height: 330px;
     background-color: #be3a34;
+    color: white;
+}
+
+footer .content {
+    height: 100%;
+}
+
+footer .main {
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .main .contact {
+    width: 490px;
+    display: flex;
+}
+
+footer .contact-description {
+    padding-top: 30px;
+}
+
+footer .contact-logo {
+    margin-right: 30px;
+}
+
+footer .main .title-line {
+    background: #FFFFFF;
+}
+
+footer .content .credits {
+    align-self: flex-end;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
