@@ -23,6 +23,10 @@ section {
     padding: 65px 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 button.learn-more, button.read-more {
     width: 130px;
     height: 45px;
@@ -45,6 +49,14 @@ button.learn-more:hover, button.read-more:hover {
     color: #be3a34;
 }
 
+.arrow {
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    transform: rotate(45deg);
+}
+
 .title-line {
     height: 3px;
     background-color: #be3a34;
@@ -52,11 +64,141 @@ button.learn-more:hover, button.read-more:hover {
     margin: 20px 0;
 }
 
+.sub-content {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-between;
+    transition: height 1s ease-in-out;
+    height: 0;
+    overflow-y: hidden;
+}
+
+.sub-content .menu-container {
+    z-index: 3;
+}
+
+.sub-content .description-container {
+    width: 600px;
+    position: relative;
+    height: fit-content;
+    z-index: 2;
+}
+
+.sub-content .description-container > .description {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    width: 100%;
+}
+
+.sub-content .description-container .description.active {
+    left:0;
+    opacity: 1;
+}
+
+.sub-content .description-container .description.out {
+    left: 100%;
+}
+
+.sub-content .menu {
+    width: 280px;
+}
+
+.sub-content .menu button {
+    height: 65px;
+    background: #be3a34;
+    border: 1px solid #be3a34;
+    border-top-color: white;
+    border-bottom: none;
+    width: 100%;
+    font-size: 16px;
+    color: white;
+    text-align: left;
+    padding-left: 22px;
+    padding-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sub-content .menu button:last-child {
+    border-bottom: 1px solid #be3a34;
+}
+
+.sub-content .menu button .arrow {
+    margin-right: 20px;
+}
+
+.sub-content .menu .title.button {
+    font-size: 20px;
+}
+
+.sub-content .menu button:not(.title):hover,
+.sub-content .menu button:not(.title).active {
+    background:white;
+    color: #be3a34;
+    border-color: #be3a34;
+}
+
+.sub-content .menu button:not(.title):hover .arrow,
+.sub-content .menu button:not(.title).active .arrow {
+    border-color: #be3a34;
+}
+
+.sub-content .menu button.title {
+    cursor: auto;
+}
+
+.sub-content .description {
+    text-align: left;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.sub-content .description .title-line {
+    margin: 10px 0 20px 0;
+}
+
+.sub-content .partners img {
+    display: inline-block;
+    width: 32%;
+}
+
+.sub-content .management .member {
+    width: 98%;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    border-bottom: 4px solid #be3a34;
+    padding: 50px 25px;
+    margin-bottom: 40px;
+}
+
+.sub-content .management .member .pic {
+    width: 150px;
+    height: 170px;
+    background: #3d3d3d;
+    margin: 0 30px 25px 0;
+    float: left;
+}
+
+.sub-content .management .member .name {
+    color: #be3a34;
+}
+
+.sub-content .management .member .description {
+    width: 100%;
+}
+
+button:focus {
+    outline: none;
+}
+
 header {
     height: 100px;
     width: 100%;
     position: fixed;
-    z-index: 3;
+    z-index: 4;
     top: 0;
     left: 0;
     background: #be3a34;
