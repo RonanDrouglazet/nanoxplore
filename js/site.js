@@ -36,27 +36,40 @@ const initMenu = () => {
 const initMore = () => {
     $('.learn-more, .read-more').each(function() {
         const button = $(this)
-        const sub = button.parent().find('.sub-content')
+        const sub = $('.sub-content.' + button.data('sub'))
+        console.log(sub.find('.description.active').height())
         const height = () => sub.find('.description.active').height()
 
-        button.click(() => sub.css('height', sub.height() ? 0 : height() + 'px'))
+        button.click(() => {
+            const active = sub.parent().find('.sub-content.active')
+            if (active.length && active != sub) {
+                active.css('height', 0)
+                active.toggleClass('active')
+            }
+            console.log(sub.find('.description.active'), height())
+            sub.css('height', sub.height() ? 0 : height() + 'px')
+            sub.toggleClass('active')
+        })
     })
 }
 
 const initSub = () => {
-    $('.sub-content .menu button:not(.title').each(function() {
-        $(this).click(function() {
-            const toShow = $('.sub-content .description.' + $(this).data('menu'))
-            const current = $('.sub-content .description.active')
-            const height = Math.max(toShow.height(), $('.sub-content .menu').height())
+    $('.sub-content').each(function() {
+        const sub = $(this)
+        sub.find('.menu button:not(.title)').each(function () {
+            $(this).click(function () {
+                const toShow = sub.find('.description.' + $(this).data('menu'))
+                const current = sub.find('.description.active')
+                const height = Math.max(toShow.height(), sub.find('.menu').height())
 
-            if (toShow !== current) {
-                current.toggleClass('active', 'out')
-                toShow.toggleClass('active')
-                $('.sub-content .menu button.active').toggleClass('active')
-                $(this).toggleClass('active')
-                $('.sub-content').css('height', height + 'px')
-            }
+                if (toShow !== current) {
+                    current.toggleClass('active', 'out')
+                    toShow.toggleClass('active')
+                    sub.find(' .menu button.active').toggleClass('active')
+                    $(this).toggleClass('active')
+                    sub.css('height', height + 'px')
+                }
+            })
         })
     })
 }

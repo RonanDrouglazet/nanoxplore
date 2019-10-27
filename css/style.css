@@ -66,7 +66,7 @@ button.learn-more:hover, button.read-more:hover {
 
 .sub-content {
     display: flex;
-    margin-top: 100px;
+    margin-top: 70px;
     justify-content: space-between;
     transition: height 1s ease-in-out;
     height: 0;
@@ -91,6 +91,7 @@ button.learn-more:hover, button.read-more:hover {
     transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
     opacity: 0;
     width: 100%;
+    text-align: justify;
 }
 
 .sub-content .description-container .description.active {
@@ -100,6 +101,18 @@ button.learn-more:hover, button.read-more:hover {
 
 .sub-content .description-container .description.out {
     left: 100%;
+}
+
+.sub-content .description-container ul {
+    background: #be3a34;
+    color: white;
+    padding: 10px 40px;
+    list-style: circle;
+    font-size: 14px;
+}
+
+.sub-content .description-container ul li {
+    margin: 10px 0;
 }
 
 .sub-content .menu {
@@ -157,6 +170,10 @@ button.learn-more:hover, button.read-more:hover {
     line-height: 20px;
 }
 
+.sub-content .description img {
+    max-width: 100%;
+}
+
 .sub-content .description .title-line {
     margin: 10px 0 20px 0;
 }
@@ -188,6 +205,7 @@ button.learn-more:hover, button.read-more:hover {
 
 .sub-content .management .member .description {
     width: 100%;
+    text-align: justify;
 }
 
 button:focus {
@@ -321,7 +339,7 @@ section.company {
     margin-top: 20px;
 }
 
-section.products {
+section.products:not(.sub) {
     height: 500px;
     background-image: url('../assets/img/products_bg.jpg');
     background-size: cover;
@@ -330,36 +348,44 @@ section.products {
     text-align: center;
 }
 
-section.products .title-line {
+section.products:not(.sub) .title-line {
     background-color: white;
     margin: 20px auto;
 }
 
-.products .products-container {
+.products:not(.sub) .products-container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.products .product {
+.products:not(.sub) .product {
     width: 50%;
     padding: 50px;
 }
 
-.products .product p {
+.products:not(.sub) .product p {
     text-align: justify;
     height: 100px;
 }
 
-.products .read-more {
+.products:not(.sub) .read-more {
     border: 1px solid white;
     background: none;
     color: white;
 }
 
-.products .read-more:hover {
+.products:not(.sub) .read-more:hover {
     background: white;
     color: #be3a34;
+}
+
+section.products.sub {
+    padding-top: 70px;
+}
+
+section.products.sub .sub-content {
+    margin-top: 0;
 }
 
 section.news {
