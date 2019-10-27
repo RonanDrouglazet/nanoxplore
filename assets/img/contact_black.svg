@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>contact</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="contact" transform="translate(1.000000, 1.000000)" stroke="#3D3D3D">
+            <g id="Group" transform="translate(26.000000, 30.000000)">
+                <rect id="Rectangle" x="0.5" y="0.5" width="29" height="22"></rect>
+                <path d="M1,1.5 L15,12.2439607" id="Line" stroke-linecap="square"></path>
+                <path d="M28.5,0.999999959 L15.733761,12.8205916" id="Line" stroke-linecap="square" transform="translate(22.116881, 6.910296) rotate(4.797402) translate(-22.116881, -6.910296) "></path>
+            </g>
+            <circle id="Oval" stroke-width="2" cx="41" cy="41" r="41"></circle>
+        </g>
+    </g>
+</svg>

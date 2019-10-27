@@ -37,18 +37,20 @@ const initMore = () => {
     $('.learn-more, .read-more').each(function() {
         const button = $(this)
         const sub = $('.sub-content.' + button.data('sub'))
-        console.log(sub.find('.description.active').height())
-        const height = () => sub.find('.description.active').height()
+        const padding = parseInt(sub.data('padding'), 10) || 0
+        const height = () => sub.find('.description.active').height() + padding
 
         button.click(() => {
             const active = sub.parent().find('.sub-content.active')
-            if (active.length && active != sub) {
+            if (active.length && active.get(0) != sub.get(0)) {
                 active.css('height', 0)
+                active.css('padding-top', 0)
                 active.toggleClass('active')
             }
-            console.log(sub.find('.description.active'), height())
-            sub.css('height', sub.height() ? 0 : height() + 'px')
+            const shouldClose = !!sub.height()
             sub.toggleClass('active')
+            sub.css('height', shouldClose ? 0 : height() + 'px')
+            sub.css('padding-top', shouldClose ? 0 : padding + 'px')
         })
     })
 }
