@@ -62,7 +62,8 @@ const initSub = () => {
             $(this).click(function () {
                 const toShow = sub.find('.description.' + $(this).data('menu'))
                 const current = sub.find('.description.active')
-                const height = Math.max(toShow.height(), sub.find('.menu').height())
+                const padding = parseInt(sub.data('padding'), 10) || 0
+                const height = Math.max(toShow.height() + padding, sub.find('.menu').height())
 
                 if (toShow !== current) {
                     current.toggleClass('active', 'out')
