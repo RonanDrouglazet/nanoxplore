@@ -14,10 +14,11 @@ const initMenu = () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.filter(entry => entry.isIntersecting).forEach(entry => {
+            console.log(entry.target, entry.intersectionRatio)
             currentPosition = () => getMenuButtonFromSection(entry.target).getBoundingClientRect()
             setButtonLineRect(currentPosition())
         })
-    }, {threshold: 0.5})
+    }, {threshold: 0.25})
 
     document.querySelectorAll('section').forEach(section => observer.observe(section))
     observer.observe(document.querySelector('footer'))

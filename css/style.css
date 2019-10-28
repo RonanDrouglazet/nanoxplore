@@ -103,7 +103,7 @@ button.learn-more:hover, button.read-more:hover {
     left: 100%;
 }
 
-.sub-content .description-container ul {
+ul {
     background: #be3a34;
     color: white;
     padding: 10px 40px;
@@ -111,7 +111,7 @@ button.learn-more:hover, button.read-more:hover {
     font-size: 14px;
 }
 
-.sub-content .description-container ul li {
+ul li {
     margin: 10px 0;
 }
 
@@ -388,8 +388,24 @@ section.products.sub .sub-content {
     margin-top: 0;
 }
 
+section.support {
+    text-align: center;
+}
+
+section.support .title-line {
+    margin: 0 auto 40px auto;
+}
+
+section.support .sub-content {
+    margin-top: 0;
+}
+
+section.support .adress, section.careers .adress {
+    color: #be3a34;
+    font-weight: bold;
+}
+
 section.news {
-    height: 700px;
     text-align: center;
 }
 
@@ -462,6 +478,81 @@ section.news {
 
 .news.big .description {
     padding-left: 0;
+}
+
+section.careers h1 {
+    text-align: center;
+}
+
+section.careers h1.secondary {
+    text-align: left;
+    margin-top: 50px;
+}
+
+section.careers .title-line {
+    margin: 0 auto 50px auto;
+}
+
+section.careers .title-line.secondary {
+    margin-left: 0;
+}
+
+.careers .job {
+    width: 380px;
+    height: 290px;
+    background-image: url('../assets/img/job.png');
+    background-size: cover;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.careers .job-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.careers .job-container.first {
+    margin-bottom: 50px;
+}
+
+.careers .job-container .overlay {
+    background: rgb(190, 58, 52, 0.9);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 115px;
+    transition: height 0.3s ease-in-out;
+    font-size: 25px;
+    line-height: 28px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.careers .job:hover .overlay {
+    height: 100%;
+}
+
+.careers .learn-more {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    height: 0;
+    width: 130px;
+    opacity: 0;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.careers .job:hover .learn-more {
+    height: 45px;
+    opacity: 1;
 }
 
 section.contact .content {
