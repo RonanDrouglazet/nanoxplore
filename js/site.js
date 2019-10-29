@@ -14,7 +14,6 @@ const initMenu = () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.filter(entry => entry.isIntersecting).forEach(entry => {
-            console.log(entry.target, entry.intersectionRatio)
             currentPosition = () => getMenuButtonFromSection(entry.target).getBoundingClientRect()
             setButtonLineRect(currentPosition())
         })
@@ -39,19 +38,21 @@ const initMore = () => {
         const button = $(this)
         const sub = $('.sub-content.' + button.data('sub'))
         const padding = parseInt(sub.data('padding'), 10) || 0
-        const height = () => sub.find('.description.active').height() + padding
+        const height = () => Math.max(sub.find('.description.active').height(), sub.find('.menu').height()) + (padding * 2)
 
         button.click(() => {
             const active = sub.parent().find('.sub-content.active')
             if (active.length && active.get(0) != sub.get(0)) {
                 active.css('height', 0)
                 active.css('padding-top', 0)
+                active.css('padding-bottom', 0)
                 active.toggleClass('active')
             }
             const shouldClose = !!sub.height()
             sub.toggleClass('active')
             sub.css('height', shouldClose ? 0 : height() + 'px')
             sub.css('padding-top', shouldClose ? 0 : padding + 'px')
+            sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
         })
     })
 }
@@ -64,7 +65,7 @@ const initSub = () => {
                 const toShow = sub.find('.description.' + $(this).data('menu'))
                 const current = sub.find('.description.active')
                 const padding = parseInt(sub.data('padding'), 10) || 0
-                const height = Math.max(toShow.height() + padding, sub.find('.menu').height())
+                const height = Math.max(toShow.height(), sub.find('.menu').height()) + (padding * 2)
 
                 if (toShow !== current) {
                     current.toggleClass('active', 'out')
