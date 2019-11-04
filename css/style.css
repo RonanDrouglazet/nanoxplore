@@ -1,5 +1,6 @@
 html, body {
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 ol, ul {
@@ -522,17 +523,13 @@ section.careers-sub .sub-content {
     margin: 0;
 }
 
-section.jobs h1 {
-    text-align: center;
+section.careers-sub .description.jobs .title-line {
+    margin: 10px 0 40px 0;
 }
 
-section.jobs .title-line {
-    margin: auto auto 50px auto;
-}
-
-section.jobs .job {
-    width: 380px;
-    height: 290px;
+section.careers-sub .description.jobs .job {
+    width: 280px;
+    height: 240px;
     background-image: url('../assets/img/job.png');
     background-size: cover;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
@@ -542,16 +539,16 @@ section.jobs .job {
     cursor: pointer;
 }
 
-section.jobs .job-container {
+section.careers-sub .description.jobs .job-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
-section.jobs .job-container.first {
+section.careers-sub .description.jobs .job-container.first {
     margin-bottom: 50px;
 }
 
-section.jobs .job-container .overlay {
+section.careers-sub .description.jobs .job-container .overlay {
     background: rgb(190, 58, 52, 0.9);
     width: 100%;
     position: absolute;
@@ -569,11 +566,11 @@ section.jobs .job-container .overlay {
     justify-content: space-evenly;
 }
 
-section.jobs .job:hover .overlay {
+section.careers-sub .description.jobs .job:hover .overlay {
     height: 100%;
 }
 
-section.jobs .learn-more {
+section.careers-sub .description.jobs .learn-more {
     background: none;
     border: 1px solid white;
     color: white;
@@ -583,7 +580,7 @@ section.jobs .learn-more {
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-section.jobs .job:hover .learn-more {
+section.careers-sub .description.jobs .job:hover .learn-more {
     height: 45px;
     opacity: 1;
 }

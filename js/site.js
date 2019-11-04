@@ -27,6 +27,11 @@ const initMenu = () => {
         setButtonLineRect(this.getBoundingClientRect())
     }, () => { timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 500) })
 
+    $('header .menu .button').click(function () {
+        const position = $('section.' + $(this).data('menu')).offset().top - $('header').height()
+        scrollTo(0, position)
+    })
+
     $(window).on('resize', () => {
         clearTimeout(timeoutPosition)
         timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 1)
