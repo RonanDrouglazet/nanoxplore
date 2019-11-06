@@ -89,3 +89,78 @@ $(window).ready(() => {
     initMore()
     initSub()
 })
+
+const sales = {
+    "Europe": {
+        "lat": 48.1015541,
+        "lng": 4.1646157,
+        "zoom": 4,
+        "adress": [
+            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.183285, "lng": 16.320322} },
+            { "title": "EBV Europe Comm. VA", "position": { "lat": 50.887022, "lng": 4.456317 } }
+        ]
+    },
+    "Middle East & Africa": {
+        "lat": 35.4240095,
+        "lng": 36.0826898,
+        "zoom": 5,
+        "adress": [
+            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
+        ]
+    },
+    "Asia": {
+        "lat": 0,
+        "lng": 0,
+        "zoom": 0,
+        "adress": [
+            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
+        ]
+    },
+    "Latin America": {
+        "lat": 0,
+        "lng": 0,
+        "zoom": 0,
+        "adress": [
+            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
+        ]
+    },
+    "North America": {
+        "lat": 0,
+        "lng": 0,
+        "zoom": 0,
+        "adress": [
+            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333 } }
+        ]
+    }
+}
+
+window.initMap = () => {
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: sales["Europe"],
+        zoom: sales["Europe"].zoom,
+        mapTypeControl: false
+    })
+    let markers = []
+
+    const centerOn = continent => {
+        markers.forEach(marker => marker.setMap(null))
+        markers = continent.adress.map(sale => new google.maps.Marker({ ...sale, map }))
+
+        /*new MarkerClusterer(map, markers,
+            { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })*/
+
+        map.setCenter(continent)
+        map.setZoom(continent.zoom)
+    }
+
+    for (continent in sales) {
+        $('.gmap-container .menu')
+            .append('<button data-menu="'+ continent +'">'+ continent +'<div class="arrow"></div></button>')
+    }
+
+    $('.gmap-container .menu button:not(.title)').click(function() {
+        centerOn(sales[$(this).data('menu')])
+    })
+
+    centerOn(sales["Europe"])
+}
