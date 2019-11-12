@@ -22,7 +22,7 @@ const initMenu = () => {
     document.querySelectorAll('section').forEach(section => observer.observe(section))
     observer.observe(document.querySelector('footer'))
 
-    $('header .menu .button').hover(function() {
+    $('header .menu .button[data-menu]').hover(function() {
         clearTimeout(timeoutPosition)
         setButtonLineRect(this.getBoundingClientRect())
     }, () => { timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 500) })

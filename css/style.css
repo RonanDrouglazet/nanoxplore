@@ -50,6 +50,17 @@ button.learn-more:hover, button.read-more:hover {
     color: #be3a34;
 }
 
+button.download {
+    background: #979797;
+    margin: 20px auto 0 auto;
+    border: 1px solid #979797;
+}
+
+button.download:hover {
+    color: #979797;
+    background: white;
+}
+
 .arrow {
     width: 10px;
     height: 10px;
@@ -105,15 +116,19 @@ button.learn-more:hover, button.read-more:hover {
 }
 
 ul {
-    background: #be3a34;
-    color: white;
-    padding: 10px 40px;
-    list-style: circle;
+    padding: 0 20px;
+    list-style:none;
     font-size: 14px;
 }
 
 ul li {
     margin: 10px 0;
+    display: flex;
+}
+
+ul li .puce {
+    margin: 5px 8px 0 0;
+    height: 10px;
 }
 
 .gmap-container .menu, .sub-content .menu {
@@ -205,6 +220,7 @@ ul li {
     width: 150px;
     height: 170px;
     background: #3d3d3d;
+    background-size: cover;
     margin: 0 30px 25px 0;
     float: left;
 }
@@ -218,6 +234,10 @@ ul li {
     text-align: justify;
 }
 
+.sub-content .management .member .description h3 {
+    text-align: left;
+}
+
 button:focus {
     outline: none;
 }
@@ -229,7 +249,7 @@ header {
     z-index: 4;
     top: 0;
     left: 0;
-    background: #be3a34;
+    background: #979797;
 }
 
 .content {
@@ -251,16 +271,20 @@ header .menu-container {
     width: 100%;
 }
 
+header .logo img {
+    height: 80px;
+}
+
 header .menu {
     width: 100%;
-    max-width: 540px;
     display: flex;
     justify-content: space-between;
-    color: white;
+    color: black;
     font-weight: 700;
     font-size: 14px;
     letter-spacing: .35px;
     text-transform: uppercase;
+    align-items: center;
 }
 
 header .menu .button {
@@ -277,13 +301,12 @@ header .menu .button-line {
 header .search.button {
     width: 48px;
     height: 48px;
-    background-image: url('../assets/img/loupe.svg');
-    margin-left: 25px;
+    background-image: url('../assets/img/loupe_b.svg');
     cursor: pointer;
 }
 
 header .search.button:hover {
-    background-image: url('../assets/img/loupe_over.svg');
+    background-image: url('../assets/img/loupe.svg');
 }
 
 section.welcome {
