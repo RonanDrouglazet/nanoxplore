@@ -11,13 +11,16 @@ let currentPosition
 let timeoutPosition
 
 const initMenu = () => {
-
+    const observed = []
+    const getObserved = target => observed.find(_ => _.target === target) || observed.push({target})
+    const getBiggest = () => observed.reduce((acc, curr) => !acc || curr.vheight > acc.vheight ? curr : acc)
     const observer = new IntersectionObserver(entries => {
         entries.filter(entry => entry.isIntersecting).forEach(entry => {
-            currentPosition = () => getMenuButtonFromSection(entry.target).getBoundingClientRect()
+            getObserved(entry.target).vheight = entry.intersectionRect.height
+            currentPosition = () => getMenuButtonFromSection(getBiggest().target).getBoundingClientRect()
             setButtonLineRect(currentPosition())
         })
-    }, {threshold: 0.25})
+    }, { threshold: new Array(100).fill(0).map((v, i) => i / 100)})
 
     document.querySelectorAll('section').forEach(section => observer.observe(section))
     observer.observe(document.querySelector('footer'))

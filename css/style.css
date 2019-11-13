@@ -7,10 +7,6 @@ ol, ul {
   list-style: none;
 }
 
-body {
-    padding-top: 100px;
-}
-
 body, h1, h2, h3, h4, h5, h6 {
     font-family: 'Roboto', sans-serif;
 }
@@ -249,7 +245,7 @@ header {
     z-index: 4;
     top: 0;
     left: 0;
-    background: #979797;
+    background: rgba(255,255,255,0.8);
 }
 
 .content {
@@ -291,9 +287,13 @@ header .menu .button {
     cursor: pointer;
 }
 
+header .menu .button:hover {
+    color: #be3a34;
+}
+
 header .menu .button-line {
     height: 3px;
-    background: white;
+    background: black;
     transition: left 0.5s ease-in-out, width 0.5s ease-in-out;
     position: absolute;
 }
@@ -310,12 +310,19 @@ header .search.button:hover {
 }
 
 section.welcome {
-    height: 700px;
+    max-height: 100vh;
+    min-height: 645px;
     background: url('../assets/img/welcome_bg.jpg');
     background-size: cover;
     background-position: 50%;
     position: relative;
-    padding-top: 135px;
+    padding-top: 0;
+}
+
+.welcome .pusher {
+    height: 20vh;
+    min-height: 100px;
+    max-height: 250px;
 }
 
 .welcome .layer {
