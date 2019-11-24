@@ -112,28 +112,22 @@ const sales = {
         ]
     },
     "Asia": {
-        "lat": 0,
-        "lng": 0,
-        "zoom": 0,
-        "adress": [
-            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
-        ]
+        "lat": 20.9476615,
+        "lng": 120,
+        "zoom": 3,
+        "adress": []
     },
     "Latin America": {
-        "lat": 0,
-        "lng": 0,
-        "zoom": 0,
-        "adress": [
-            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
-        ]
+        "lat": -12.8502189,
+        "lng": -74.5430881,
+        "zoom": 3,
+        "adress": []
     },
     "North America": {
-        "lat": 0,
-        "lng": 0,
-        "zoom": 0,
-        "adress": [
-            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333 } }
-        ]
+        "lat": 38.6773198,
+        "lng": -97.9922459,
+        "zoom": 4,
+        "adress": []
     }
 }
 
@@ -163,6 +157,11 @@ window.initMap = () => {
 
     $('.gmap-container .menu button:not(.title)').click(function() {
         centerOn(sales[$(this).data('menu')])
+        if (!sales[$(this).data('menu')].adress.length) {
+            $('.gmap-container .coming').show().css('display', 'flex')
+        } else {
+            $('.gmap-container .coming').hide()
+        }
     })
 
     centerOn(sales["Europe"])

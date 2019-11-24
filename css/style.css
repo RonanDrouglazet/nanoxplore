@@ -312,7 +312,7 @@ header .search.button:hover {
 section.welcome {
     max-height: 100vh;
     min-height: 645px;
-    background: url('../assets/img/welcome_bg.jpg');
+    background: url('../assets/img/BANNIERE_HEADER.jpg');
     background-size: cover;
     background-position: 50%;
     position: relative;
@@ -381,7 +381,7 @@ section.company {
 
 section.products:not(.sub) {
     height: 500px;
-    background-image: url('../assets/img/products_bg.jpg');
+    background-image: url('../assets/img/PRODUCT_BG.jpg');
     background-size: cover;
     background-position: 50%;
     color: #fefefe;
@@ -471,10 +471,25 @@ section.sales .gmap-container {
 
 section.sales .gmap {
     width: 100%;
+    position: relative;
 }
 
 section.sales #map {
     height: 100%;
+}
+
+section.sales .coming {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, .8);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
 }
 
 section.news {
