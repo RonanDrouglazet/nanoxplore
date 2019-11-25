@@ -162,6 +162,8 @@ ul li .puce {
 .sub-content .menu .title.button {
     font-size: 20px;
     text-transform: uppercase;
+    background: #555555;
+    border: 1px solid #555555;
 }
 
 .gmap-container .menu button:not(.title):hover,
@@ -204,7 +206,8 @@ ul li .puce {
     width: 32%;
 }
 
-.sub-content .management .member {
+.sub-content .management .member,
+.news-details-container {
     width: 98%;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     border-bottom: 4px solid #be3a34;
@@ -212,7 +215,8 @@ ul li .puce {
     margin-bottom: 40px;
 }
 
-.sub-content .management .member .pic {
+.sub-content .management .member .pic,
+.news-details-container .pic {
     width: 150px;
     height: 170px;
     background: #3d3d3d;
@@ -221,16 +225,19 @@ ul li .puce {
     float: left;
 }
 
-.sub-content .management .member .name {
+.sub-content .management .member .name,
+.news-details-container .name {
     color: #be3a34;
 }
 
-.sub-content .management .member .description {
+.sub-content .management .member .description,
+.news-details-container .description {
     width: 100%;
     text-align: justify;
 }
 
-.sub-content .management .member .description h3 {
+.sub-content .management .member .description h3,
+.news-details-container .description h3 {
     text-align: left;
 }
 
@@ -538,6 +545,9 @@ section.news {
 .news .description {
     text-align: left;
     padding-left: 20px;
+}
+
+.news:not(.big) .description {
     width: 65%;
 }
 
@@ -565,6 +575,7 @@ section.news {
 
 .news.big .description {
     padding-left: 0;
+    width: 100%;
 }
 
 section.careers {
