@@ -127,6 +127,12 @@ ul li .puce {
     height: 10px;
 }
 
+span.adress {
+    color: #be3a34;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .gmap-container .menu, .sub-content .menu {
     width: 280px;
 }
@@ -215,8 +221,7 @@ ul li .puce {
     margin-bottom: 40px;
 }
 
-.sub-content .management .member .pic,
-.news-details-container .pic {
+.sub-content .management .member .pic {
     width: 150px;
     height: 170px;
     background: #3d3d3d;
@@ -451,11 +456,6 @@ section.support .sub-content {
     margin-top: 0;
 }
 
-section.support .adress, section.careers-sub .adress {
-    color: #be3a34;
-    font-weight: bold;
-}
-
 section.support-sub {
     padding: 0;
 }
@@ -518,7 +518,7 @@ section.news {
     width: 50%;
 }
 
-.news .little {
+.news .news-container .little {
     height: 33%;
     width: 85%;
     padding: 5% 0;
@@ -526,11 +526,11 @@ section.news {
     align-items: center;
 }
 
-.news .little:first-child {
+.news .news-container .little:first-child {
     padding: 0 0 5% 0;
 }
 
-.news .little .image {
+.news .news-container .little .image {
     width: 100px;
     height: 100px;
     background: black;
@@ -538,26 +538,26 @@ section.news {
     background-position: 50%;
 }
 
-.news .little:not(:first-child) {
+.news .news-container .little:not(:first-child) {
     border-top: 1px solid #e6e6e6;
 }
 
-.news .description {
+.news .news-container .description {
     text-align: left;
     padding-left: 20px;
 }
 
-.news:not(.big) .description {
+.news-container .news:not(.big) .description {
     width: 65%;
 }
 
-.news .description span {
+.news .news-container .description span {
     font-size: 14px;
     font-weight: 700;
     color:#979797;
 }
 
-.news .description p {
+.news .news-container .description p {
     color:#be3a34;
     font-size: 21px;
     line-height: 24px;
@@ -576,6 +576,19 @@ section.news {
 .news.big .description {
     padding-left: 0;
     width: 100%;
+}
+
+.news-details-container {
+    width: 98%;
+}
+
+.news-details-container .pic {
+    width: 235px;
+    height: 170px;
+    background: #3d3d3d;
+    background-size: cover;
+    margin: 0 20px 10px 0;
+    float: left;
 }
 
 section.careers {
