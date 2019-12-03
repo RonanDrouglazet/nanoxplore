@@ -393,7 +393,7 @@ section.company {
 
 section.products:not(.sub) {
     height: 500px;
-    background-image: url('../assets/img/PRODUCT_BG.jpg');
+    background-image: url('../assets/img/PRODUCT-V2.jpg');
     background-size: cover;
     background-position: 50%;
     color: #fefefe;
@@ -592,7 +592,7 @@ section.news {
 }
 
 section.careers {
-    background: url('../assets/img/careers.jpg');
+    background: url('../assets/img/CAREER.jpg');
     background-size: cover;
     background-position: 50%;
     color: white;
