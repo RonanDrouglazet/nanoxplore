@@ -4,7 +4,20 @@ html, body {
 }
 
 ol, ul {
-  list-style: none;
+    list-style: none;
+}
+
+ul {
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+ul li {
+    margin: 10px 0 0 10px;
+}
+
+li {
+    list-style-image: url("../assets/img/puce.svg");
 }
 
 body, h1, h2, h3, h4, h5, h6 {
@@ -109,22 +122,6 @@ button.download:hover {
 
 .sub-content .description-container .description.out {
     left: 100%;
-}
-
-ul {
-    padding: 0 20px;
-    list-style:none;
-    font-size: 14px;
-}
-
-ul li {
-    margin: 10px 0;
-    display: flex;
-}
-
-ul li .puce {
-    margin: 5px 8px 0 0;
-    height: 10px;
 }
 
 span.adress {
