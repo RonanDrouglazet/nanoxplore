@@ -47,6 +47,7 @@ const initMore = () => {
         const sub = $('.sub-content.' + button.data('sub'))
         const padding = parseInt(sub.data('padding'), 10) || 0
         const height = () => Math.max(sub.find('.description.active').height(), sub.find('.menu').height()) + (padding * 2)
+        let heightInterval
 
         button.click(() => {
             const active = sub.parent().find('.sub-content.active')
@@ -61,6 +62,14 @@ const initMore = () => {
             sub.css('height', shouldClose ? 0 : height() + 'px')
             sub.css('padding-top', shouldClose ? 0 : padding + 'px')
             sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
+
+            if (location.href.match('/admin')) {
+                if (shouldClose) {
+                    clearInterval(heightInterval)
+                } else {
+                    heightInterval = setInterval(() => sub.css('height', height() + 'px'), 1000)
+                }
+            }
         })
     })
 }
