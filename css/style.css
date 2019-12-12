@@ -225,6 +225,11 @@ span.adress {
     background-size: cover;
     margin: 0 30px 25px 0;
     float: left;
+    overflow: hidden;
+}
+
+.sub-content .management .member .pic img {
+    width: 100%;
 }
 
 .sub-content .management .member .name,
