@@ -175,3 +175,5 @@ window.initMap = () => {
 
     centerOn(sales["Europe"])
 }
+
+window.ready = true
