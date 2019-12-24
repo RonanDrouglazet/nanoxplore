@@ -1,179 +1,305 @@
-const setButtonLineRect = rect => $('header .menu .button-line').css({
+const setButtonLineRect = rect =>
+  $('header .menu .button-line').css({
     left: rect.left,
     width: rect.width,
-    top: rect.top + rect.height
-})
+    top: rect.top + rect.height,
+  })
 
 const getMenuButtonFromSection = section =>
-    $(`header .menu .button[data-menu="${$(section).data('menu')}"]`).get(0)
+  $(`header .menu .button[data-menu="${$(section).data('menu')}"]`).get(0)
 
 let currentPosition
 let timeoutPosition
 
 const initMenu = () => {
-    const observed = []
-    const getObserved = target => observed.find(_ => _.target === target) || observed.push({target})
-    const getBiggest = () => observed.reduce((acc, curr) => !acc || curr.vheight > acc.vheight ? curr : acc)
-    const observer = new IntersectionObserver(entries => {
-        entries.filter(entry => entry.isIntersecting).forEach(entry => {
-            getObserved(entry.target).vheight = entry.intersectionRect.height
-            currentPosition = () => getMenuButtonFromSection(getBiggest().target).getBoundingClientRect()
-            setButtonLineRect(currentPosition())
+  const observed = []
+  const getObserved = target =>
+    observed.find(_ => _.target === target) || observed.push({ target })
+  const getBiggest = () =>
+    observed.reduce((acc, curr) =>
+      !acc || curr.vheight > acc.vheight ? curr : acc
+    )
+  const observer = new IntersectionObserver(
+    entries => {
+      entries
+        .filter(entry => entry.isIntersecting)
+        .forEach(entry => {
+          getObserved(entry.target).vheight = entry.intersectionRect.height
+          currentPosition = () =>
+            getMenuButtonFromSection(
+              getBiggest().target
+            ).getBoundingClientRect()
+          setButtonLineRect(currentPosition())
         })
-    }, { threshold: new Array(100).fill(0).map((v, i) => i / 100)})
+    },
+    { threshold: new Array(100).fill(0).map((v, i) => i / 100) }
+  )
 
-    document.querySelectorAll('section').forEach(section => observer.observe(section))
-    observer.observe(document.querySelector('footer'))
+  document
+    .querySelectorAll('section')
+    .forEach(section => observer.observe(section))
+  observer.observe(document.querySelector('footer'))
 
-    $('header .menu .button[data-menu]').hover(function() {
-        clearTimeout(timeoutPosition)
-        setButtonLineRect(this.getBoundingClientRect())
-    }, () => { timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 500) })
+  $('header .menu .button[data-menu]').hover(
+    function() {
+      clearTimeout(timeoutPosition)
+      setButtonLineRect(this.getBoundingClientRect())
+    },
+    () => {
+      timeoutPosition = setTimeout(
+        () => setButtonLineRect(currentPosition()),
+        500
+      )
+    }
+  )
 
-    $('header .menu .button').click(function () {
-        const position = $('section.' + $(this).data('menu')).offset().top - $('header').height()
-        scrollTo(0, position)
-    })
+  $('header .menu .button').click(function() {
+    const position =
+      $('section.' + $(this).data('menu')).offset().top - $('header').height()
+    scrollTo(0, position)
+  })
 
-    $(window).on('resize', () => {
-        clearTimeout(timeoutPosition)
-        timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 1)
-    })
+  $(window).on('resize', () => {
+    clearTimeout(timeoutPosition)
+    timeoutPosition = setTimeout(() => setButtonLineRect(currentPosition()), 1)
+  })
 }
 
 const initMore = () => {
-    $('.learn-more, .read-more').each(function() {
-        const button = $(this)
-        const sub = $('.sub-content.' + button.data('sub'))
-        const padding = parseInt(sub.data('padding'), 10) || 0
-        const height = () => Math.max(sub.find('.description.active').height(), sub.find('.menu').height()) + (padding * 2)
-        let heightInterval
+  $('.learn-more, .read-more').each(function() {
+    const button = $(this)
+    const sub = $('.sub-content.' + button.data('sub'))
+    const padding = parseInt(sub.data('padding'), 10) || 0
+    const height = () =>
+      Math.max(
+        sub.find('.description.active').height(),
+        sub.find('.menu').height()
+      ) +
+      padding * 2
+    let heightInterval
 
-        button.click(() => {
-            const active = sub.parent().find('.sub-content.active')
-            if (active.length && active.get(0) != sub.get(0)) {
-                active.css('height', 0)
-                active.css('padding-top', 0)
-                active.css('padding-bottom', 0)
-                active.toggleClass('active')
-            }
-            const shouldClose = !!sub.height()
-            sub.toggleClass('active')
-            sub.css('height', shouldClose ? 0 : height() + 'px')
-            sub.css('padding-top', shouldClose ? 0 : padding + 'px')
-            sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
+    button.click(() => {
+      const active = sub.parent().find('.sub-content.active')
+      if (active.length && active.get(0) != sub.get(0)) {
+        active.css('height', 0)
+        active.css('padding-top', 0)
+        active.css('padding-bottom', 0)
+        active.toggleClass('active')
+      }
+      const shouldClose = !!sub.height()
+      sub.toggleClass('active')
+      sub.css('height', shouldClose ? 0 : height() + 'px')
+      sub.css('padding-top', shouldClose ? 0 : padding + 'px')
+      sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
 
-            if (location.href.match('/admin')) {
-                if (shouldClose) {
-                    clearInterval(heightInterval)
-                } else {
-                    heightInterval = setInterval(() => sub.css('height', height() + 'px'), 1000)
-                }
-            }
-        })
+      if (location.href.match('/admin')) {
+        if (shouldClose) {
+          clearInterval(heightInterval)
+        } else {
+          heightInterval = setInterval(
+            () => sub.css('height', height() + 'px'),
+            1000
+          )
+        }
+      }
     })
+  })
 }
 
 const initSub = () => {
-    $('.sub-content').each(function() {
-        const sub = $(this)
-        sub.find('.menu button:not(.title)').each(function () {
-            $(this).click(function () {
-                const toShow = sub.find('.description.' + $(this).data('menu'))
-                const current = sub.find('.description.active')
-                const padding = parseInt(sub.data('padding'), 10) || 0
-                const height = Math.max(toShow.height(), sub.find('.menu').height()) + (padding * 2)
+  $('.sub-content').each(function() {
+    const sub = $(this)
+    sub.find('.menu button:not(.title)').each(function() {
+      $(this).click(function() {
+        const toShow = sub.find('.description.' + $(this).data('menu'))
+        const current = sub.find('.description.active')
+        const padding = parseInt(sub.data('padding'), 10) || 0
+        const height =
+          Math.max(toShow.height(), sub.find('.menu').height()) + padding * 2
 
-                if (toShow !== current) {
-                    current.toggleClass('active', 'out')
-                    toShow.toggleClass('active')
-                    sub.find(' .menu button.active').toggleClass('active')
-                    $(this).toggleClass('active')
-                    sub.css('height', height + 'px')
-                }
-            })
-        })
+        if (toShow !== current) {
+          current.toggleClass('active', 'out')
+          toShow.toggleClass('active')
+          sub.find(' .menu button.active').toggleClass('active')
+          $(this).toggleClass('active')
+          sub.css('height', height + 'px')
+        }
+      })
     })
+  })
 }
 
 $(window).ready(() => {
-    initMenu()
-    initMore()
-    initSub()
+  initMenu()
+  initMore()
+  initSub()
 })
 
-const sales = {
-    "Europe": {
-        "lat": 48.1015541,
-        "lng": 4.1646157,
-        "zoom": 4,
-        "adress": [
-            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.183285, "lng": 16.320322} },
-            { "title": "EBV Europe Comm. VA", "position": { "lat": 50.887022, "lng": 4.456317 } }
-        ]
-    },
-    "Middle East & Africa": {
-        "lat": 35.4240095,
-        "lng": 36.0826898,
-        "zoom": 5,
-        "adress": [
-            { "title": "EBV EMG Elektronische Bauelemente GmbH", "position": { "lat": 48.1832562, "lng": 16.3181333} }
-        ]
-    },
-    "Asia": {
-        "lat": 20.9476615,
-        "lng": 120,
-        "zoom": 3,
-        "adress": []
-    },
-    "Latin America": {
-        "lat": -12.8502189,
-        "lng": -74.5430881,
-        "zoom": 3,
-        "adress": []
-    },
-    "North America": {
-        "lat": 38.6773198,
-        "lng": -97.9922459,
-        "zoom": 4,
-        "adress": []
-    }
-}
+let map
+let markers = []
+let mapReady = false
+let dataReady = false
+let salesData
 
 window.initMap = () => {
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: sales["Europe"],
-        zoom: sales["Europe"].zoom,
-        mapTypeControl: false
-    })
-    let markers = []
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 48.1015541,
+      lng: 4.1646157,
+    },
+    zoom: 4,
+    mapTypeControl: false,
+  })
+  mapReady = true
+  if (dataReady) {
+    loadMap(salesData)
+  }
+}
 
-    const centerOn = continent => {
-        markers.forEach(marker => marker.setMap(null))
-        markers = continent.adress.map(sale => new google.maps.Marker({ ...sale, map }))
+const loadSales = init => {
+  $.get('./js/sales.json', json => {
+    dataReady = true
+    salesData = json
+    if (mapReady && init) {
+      loadMap(salesData)
+    } else if (mapReady && !init) {
+      centerOn(salesData['Europe'])
+    }
+  })
+}
 
-        /*new MarkerClusterer(map, markers,
+loadSales(true)
+
+const centerOn = continent => {
+  markers.forEach(marker => marker.setMap(null))
+  markers = continent.adress.map(
+    sale => new google.maps.Marker({ ...sale, map })
+  )
+  /*new MarkerClusterer(map, markers,
             { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })*/
 
-        map.setCenter(continent)
-        map.setZoom(continent.zoom)
-    }
-
-    for (continent in sales) {
-        $('.gmap-container .menu')
-            .append('<button data-menu="'+ continent +'">'+ continent +'<div class="arrow"></div></button>')
-    }
-
-    $('.gmap-container .menu button:not(.title)').click(function() {
-        centerOn(sales[$(this).data('menu')])
-        if (!sales[$(this).data('menu')].adress.length) {
-            $('.gmap-container .coming').show().css('display', 'flex')
-        } else {
-            $('.gmap-container .coming').hide()
-        }
-    })
-
-    centerOn(sales["Europe"])
+  map.setCenter(continent)
+  map.setZoom(continent.zoom)
 }
+
+const loadMap = data => {
+  for (const continent in data) {
+    $('.gmap-container .menu').append(
+      '<button data-menu="' +
+        continent +
+        '">' +
+        continent +
+        '<div class="arrow"></div></button>'
+    )
+  }
+
+  $('.gmap-container .menu button:not(.title)').click(function() {
+    centerOn(data[$(this).data('menu')])
+    if (!data[$(this).data('menu')].adress.length) {
+      $('.gmap-container .coming')
+        .show()
+        .css('display', 'flex')
+    } else {
+      $('.gmap-container .coming').hide()
+    }
+  })
+
+  centerOn(data['Europe'])
+}
+
+window.sabo_plugins = [
+  {
+    name: 'Gérer les revendeurs',
+    icon: 'mdi-settings',
+    type: 'json',
+    json: 'js/sales.json',
+    adress: {
+      select: {
+        label: 'Sélectionnez une région',
+        items: [
+          'Europe',
+          'Middle East & Africa',
+          'Asia',
+          'Latin America',
+          'North America',
+        ],
+      },
+      textfield: {
+        label: "Nom de l'adresse",
+      },
+    },
+    // eslint-disable-next-line
+    transformIn: json => {
+      const data = []
+      for (const continent in json) {
+        data.push({
+          id: continent,
+          name: continent,
+          children: json[continent].adress.map(_ => ({
+            id: _.adress,
+            name: _.title,
+          })),
+        })
+      }
+      return data
+    },
+    // eslint-disable-next-line
+    getEdited: (json, edited) => {
+      let element
+      let region
+
+      for (const r in json) {
+        element =
+          element ||
+          ((region = r) &&
+            json[r].adress.find(
+              a => a.title === edited.name && a.adress === edited.id
+            ))
+      }
+
+      return {
+        adress: element.adress,
+        textfield: element.title,
+        position: element.position,
+        select: region,
+      }
+    },
+    // eslint-disable-next-line
+    onSave: (json, newValue, oldValue) => {
+      if (!oldValue) {
+        json[newValue.select].adress.push({
+          title: newValue.textfield,
+          adress: newValue.adress,
+          position: {
+            lat: newValue.lat,
+            lng: newValue.lng,
+          },
+        })
+      } else {
+        const element = json[oldValue.select].adress.find(
+          a => a.title === oldValue.textfield && a.adress === oldValue.adress
+        )
+        element.title = newValue.textfield
+        element.adress = newValue.adress
+        element.position = {
+          lat: newValue.lat,
+          lng: newValue.lng,
+        }
+      }
+      setTimeout(() => loadSales(), 1000)
+      return json
+    },
+    // eslint-disable-next-line
+    onRemove: (json, removed) => {
+      for (const region in json) {
+        json[region].adress = json[region].adress.filter(
+          a => a.title !== removed.name || a.adress !== removed.id
+        )
+      }
+      setTimeout(() => loadSales(), 1000)
+      return json
+    },
+  },
+]
 
 window.ready = true
