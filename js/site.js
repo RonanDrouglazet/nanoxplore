@@ -140,6 +140,7 @@ let markers = []
 let mapReady = false
 let dataReady = false
 let salesData
+let openedInfo
 
 window.initMap = () => {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -173,7 +174,19 @@ loadSales(true)
 const centerOn = continent => {
   markers.forEach(marker => marker.setMap(null))
   markers = continent.adress.map(
-    sale => new google.maps.Marker({ ...sale, map })
+    sale => {
+        const marker = new google.maps.Marker({ ...sale, map })
+        marker.addListener('click', () => {
+            if (openedInfo) {
+                openedInfo.close()
+            }
+            openedInfo = new google.maps.InfoWindow({
+                content: `<h3>${sale.title}</h3><div>${sale.adress}</div>`
+            })
+            openedInfo.open(map, marker)
+        })
+        return marker
+    }
   )
   /*new MarkerClusterer(map, markers,
             { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })*/
