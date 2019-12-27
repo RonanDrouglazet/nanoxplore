@@ -112,6 +112,7 @@ const initSub = () => {
     sub.find('.menu button:not(.title)').each(function(i) {
       if (i === 0) {
         $(this).addClass('active')
+        $('.description.' + $(this).attr('data-menu')).addClass('active')
       }
       $(this).attr('data-sabo-clone', 'onClone')
       $(this).attr('data-sabo-remove', 'onRemove')
