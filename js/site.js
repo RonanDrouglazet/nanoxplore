@@ -109,7 +109,13 @@ const initMore = () => {
 const initSub = () => {
   $('.sub-content').each(function() {
     const sub = $(this)
-    sub.find('.menu button:not(.title)').each(function() {
+    sub.find('.menu button:not(.title)').each(function(i) {
+      if (i === 0) {
+        $(this).addClass('active')
+      }
+      $(this).attr('data-sabo-clone', 'onClone')
+      $(this).attr('data-sabo-remove', 'onRemove')
+      $(this).off('click')
       $(this).click(function() {
         const toShow = sub.find('.description.' + $(this).data('menu'))
         const current = sub.find('.description.active')
@@ -173,21 +179,19 @@ loadSales(true)
 
 const centerOn = continent => {
   markers.forEach(marker => marker.setMap(null))
-  markers = continent.adress.map(
-    sale => {
-        const marker = new google.maps.Marker({ ...sale, map })
-        marker.addListener('click', () => {
-            if (openedInfo) {
-                openedInfo.close()
-            }
-            openedInfo = new google.maps.InfoWindow({
-                content: `<h3>${sale.title}</h3><div>${sale.adress}</div>`
-            })
-            openedInfo.open(map, marker)
-        })
-        return marker
-    }
-  )
+  markers = continent.adress.map(sale => {
+    const marker = new google.maps.Marker({ ...sale, map })
+    marker.addListener('click', () => {
+      if (openedInfo) {
+        openedInfo.close()
+      }
+      openedInfo = new google.maps.InfoWindow({
+        content: `<h3>${sale.title}</h3><div>${sale.adress}</div>`,
+      })
+      openedInfo.open(map, marker)
+    })
+    return marker
+  })
   /*new MarkerClusterer(map, markers,
             { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })*/
 
@@ -249,7 +253,7 @@ window.sabo_plugins = [
           id: continent,
           name: continent,
           children: json[continent].adress.map(_ => ({
-            id: _.adress,
+            id: _.adress + _.title,
             name: _.title,
           })),
         })
@@ -265,9 +269,7 @@ window.sabo_plugins = [
         element =
           element ||
           ((region = r) &&
-            json[r].adress.find(
-              a => a.title === edited.name && a.adress === edited.id
-            ))
+            json[r].adress.find(a => a.adress + a.title === edited.id))
       }
 
       return {
@@ -306,13 +308,67 @@ window.sabo_plugins = [
     onRemove: (json, removed) => {
       for (const region in json) {
         json[region].adress = json[region].adress.filter(
-          a => a.title !== removed.name || a.adress !== removed.id
+          a => a.adress + a.title !== removed.id
         )
       }
       setTimeout(() => loadSales(), 1000)
       return json
     },
   },
+  {
+    name: 'Ajouter une news',
+    icon: 'mdi-newspaper',
+    type: 'exec',
+    // eslint-disable-next-line
+    exec: () => {
+      document.querySelector('.sub-content.news-details').scrollIntoView()
+      const bt = document.querySelector(
+        '.sub-content.news-details .menu button:not(.title)'
+      )
+      const clone = bt.cloneNode(true)
+      bt.parentElement.insertBefore(clone, bt)
+      return document.defaultView.onClone(clone, true)
+    },
+  },
 ]
+
+window.onClone = (clonedElement, useTemplate) => {
+  const id = (Date.now() * Math.random()).toString().replace('.', '')
+  const oldDescClass = clonedElement.getAttribute('data-menu')
+  clonedElement.innerHTML = 'Votre titre<div class="arrow"></div>'
+  clonedElement.setAttribute('data-menu', id)
+  if (clonedElement.classList.contains('active')) {
+    Array.from(
+      clonedElement.parentElement.getElementsByClassName('active')
+    ).forEach(_ => _.classList.remove('active'))
+    clonedElement.classList.add('active')
+  }
+  const grandpa = clonedElement.parentElement.parentElement.parentElement
+  const template =
+    (useTemplate &&
+      grandpa.getElementsByClassName('description template')[0]) ||
+    grandpa.getElementsByClassName(oldDescClass)[0]
+  const newDesc = template.cloneNode(true)
+  newDesc.className = 'description ' + id
+  template.parentElement.appendChild(newDesc)
+  initSub()
+  clonedElement.click()
+  return {
+    addedNodes: useTemplate ? [clonedElement, newDesc] : [newDesc],
+  }
+}
+
+window.onRemove = removedElement => {
+  const toRemove = removedElement.parentElement.parentElement.parentElement.getElementsByClassName(
+    removedElement.getAttribute('data-menu')
+  )[0]
+  const parent = removedElement.parentElement
+  setTimeout(() => {
+    parent.querySelector('.menu button:not(.title)').click()
+  }, 100)
+  return {
+    removedNodes: [toRemove],
+  }
+}
 
 window.ready = true
