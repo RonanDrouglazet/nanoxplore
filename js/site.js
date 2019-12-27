@@ -322,7 +322,12 @@ window.sabo_plugins = [
     type: 'exec',
     // eslint-disable-next-line
     exec: () => {
-      document.querySelector('.sub-content.news-details').scrollIntoView()
+      setTimeout(
+        () =>
+          document.querySelector('.sub-content.news-details').scrollIntoView(),
+        100
+      )
+
       const bt = document.querySelector(
         '.sub-content.news-details .menu button:not(.title)'
       )
