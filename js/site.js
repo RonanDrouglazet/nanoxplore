@@ -325,7 +325,7 @@ window.sabo_plugins = [
       setTimeout(
         () =>
           document.querySelector('.sub-content.news-details').scrollIntoView(),
-        100
+        500
       )
 
       const bt = document.querySelector(
@@ -376,5 +376,7 @@ window.onRemove = removedElement => {
     removedNodes: [toRemove],
   }
 }
+
+window.sabo_elements = [...$('.member').get(), ...$('.title-line').get()]
 
 window.ready = true
