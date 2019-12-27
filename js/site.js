@@ -76,7 +76,6 @@ const initMore = () => {
         sub.find('.menu').height()
       ) +
       padding * 2
-    let heightInterval
 
     button.click(() => {
       const active = sub.parent().find('.sub-content.active')
@@ -85,6 +84,7 @@ const initMore = () => {
         active.css('padding-top', 0)
         active.css('padding-bottom', 0)
         active.toggleClass('active')
+        clearInterval(active.get(0).heightInterval)
       }
       const shouldClose = !!sub.height()
       sub.toggleClass('active')
@@ -94,9 +94,9 @@ const initMore = () => {
 
       if (location.href.match('/admin')) {
         if (shouldClose) {
-          clearInterval(heightInterval)
+          clearInterval(sub.get(0).heightInterval)
         } else {
-          heightInterval = setInterval(
+          sub.get(0).heightInterval = setInterval(
             () => sub.css('height', height() + 'px'),
             1000
           )
