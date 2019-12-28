@@ -603,6 +603,11 @@ section.news {
   background-size: cover;
   margin: 0 20px 10px 0;
   float: left;
+  overflow: hidden;
+}
+
+.news-details-container .pic img {
+  width: 100%;
 }
 
 section.careers {
