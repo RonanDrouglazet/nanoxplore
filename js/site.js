@@ -320,23 +320,35 @@ window.sabo_plugins = [
     name: 'Ajouter une news',
     icon: 'mdi-newspaper',
     type: 'exec',
-    // eslint-disable-next-line
-    exec: () => {
-      setTimeout(
-        () =>
-          document.querySelector('.sub-content.news-details').scrollIntoView(),
-        500
-      )
-
-      const bt = document.querySelector(
-        '.sub-content.news-details .menu button:not(.title)'
-      )
-      const clone = bt.cloneNode(true)
-      bt.parentElement.insertBefore(clone, bt)
-      return document.defaultView.onClone(clone, true)
-    },
+    exec: () => onBeforeClone('news-details'),
+  },
+  {
+    name: 'Ajouter un produit (software)',
+    icon: 'mdi-microsoft',
+    type: 'exec',
+    exec: () => onBeforeClone('software'),
+  },
+  {
+    name: 'Ajouter un produit (hardware)',
+    icon: 'mdi-cpu-64-bit',
+    type: 'exec',
+    exec: () => onBeforeClone('fgpa'),
   },
 ]
+
+const onBeforeClone = className => {
+  const sub = document.querySelector('.sub-content.' + className)
+  if (!sub.offsetHeight) {
+    document.querySelector(`button[data-sub="${className}"]`).click()
+  }
+
+  setTimeout(() => sub.scrollIntoView(), 500)
+
+  const bt = sub.querySelector(`.menu button:not(.title)`)
+  const clone = bt.cloneNode(true)
+  bt.parentElement.insertBefore(clone, bt)
+  return document.defaultView.onClone(clone, true)
+}
 
 window.onClone = (clonedElement, useTemplate) => {
   const id = (Date.now() * Math.random()).toString().replace('.', '')
