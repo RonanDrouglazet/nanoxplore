@@ -134,7 +134,7 @@ button.download:hover {
   left: 100%;
 }
 
-span.adress {
+span.adress a {
   color: #be3a34;
   font-weight: bold;
   cursor: pointer;
@@ -338,7 +338,7 @@ header .search.button:hover {
 section.welcome {
   max-height: 100vh;
   min-height: 645px;
-  background: url('../assets/img/BANNIERE_HEADER.jpg');
+  background: url('../assets/img/BANNIERE_HEADER-FINAL.jpg');
   background-size: cover;
   background-position: 50%;
   position: relative;
@@ -407,7 +407,7 @@ section.company {
 
 section.products:not(.sub) {
   height: 500px;
-  background-image: url('../assets/img/PRODUCT-V2.jpg');
+  background-image: url('../assets/img/PRODUCT-V2-FINAL.jpg');
   background-size: cover;
   background-position: 50%;
   color: #fefefe;
@@ -432,7 +432,7 @@ section.products:not(.sub) .title-line {
 
 .products:not(.sub) .product p {
   text-align: justify;
-  height: 100px;
+  min-height: 100px;
 }
 
 .products:not(.sub) .read-more {
@@ -456,7 +456,7 @@ section.products.sub .sub-content {
 
 section.support {
   text-align: center;
-  background: url('../assets/img/support.jpg');
+  background: url('../assets/img/SUPPORT-FINAL.jpg');
   background-size: cover;
   background-position: 50%;
   color: white;
@@ -611,7 +611,7 @@ section.news {
 }
 
 section.careers {
-  background: url('../assets/img/CAREER.jpg');
+  background: url('../assets/img/CAREER-FINAL.jpg');
   background-size: cover;
   background-position: 50%;
   color: white;
@@ -686,7 +686,7 @@ section.careers-sub .description.jobs .job:hover .overlay {
   height: 100%;
 }
 
-section.careers-sub .description.jobs .learn-more {
+section.careers-sub .description.jobs .job .learn-more {
   background: none;
   border: 1px solid white;
   color: white;
@@ -696,9 +696,20 @@ section.careers-sub .description.jobs .learn-more {
   transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-section.careers-sub .description.jobs .job:hover .learn-more {
+section.careers-sub .description.jobs .job a {
+  height: 0;
+  transition: height 0.3s ease-in-out;
+}
+
+section.careers-sub .description.jobs .job:hover .learn-more,
+section.careers-sub .description.jobs .job:hover a {
   height: 45px;
   opacity: 1;
+}
+
+section.careers-sub .description.jobs p {
+  color: #be3a34;
+  margin-top: 40px;
 }
 
 section.contact .content {

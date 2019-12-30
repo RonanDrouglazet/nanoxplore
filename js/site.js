@@ -66,7 +66,7 @@ const initMenu = () => {
 }
 
 const initMore = () => {
-  $('.learn-more, .read-more').each(function() {
+  $('.learn-more[data-sub], .read-more[data-sub]').each(function() {
     const button = $(this)
     const sub = $('.sub-content.' + button.data('sub'))
     const padding = parseInt(sub.data('padding'), 10) || 0
@@ -91,6 +91,10 @@ const initMore = () => {
       sub.css('height', shouldClose ? 0 : height() + 'px')
       sub.css('padding-top', shouldClose ? 0 : padding + 'px')
       sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
+
+      if (!shouldClose) {
+        button.get(0).scrollIntoView()
+      }
 
       if (location.href.match('/admin')) {
         if (shouldClose) {
@@ -136,8 +140,52 @@ const initSub = () => {
   })
 }
 
+const initNews = () => {
+  const newsContainer = $('.news-container')
+  const newsButtons = $('.sub-content.news-details .menu button:not(.title)')
+  const firstNews = $(`.description.${$(newsButtons[0]).data('menu')}`)
+  const bigNews = `
+  <div class="news big">
+    <div class="image"><img src="${$(firstNews.find('img')[0]).attr(
+      'src'
+    )}"></div>
+    <div class="description">
+      <span>${$(firstNews.find('h3 span')[0]).html()}</span>
+      <p>${$(firstNews.find('h2')[0]).html()}</p>
+      <button class="read-more" data-sub="news-details">read more</button>
+    </div>
+  </div>
+  `
+
+  let otherNews = '<div class="news">'
+  newsButtons.each((i, button) => {
+    const desc = $(`.description.${$(button).data('menu')}`)
+    if (i != 0) {
+      otherNews += `
+        <div class="little">
+          <div class="image" style="background-image: url('${$(
+            desc.find('img')[0]
+          ).attr('src')}')"></div>
+          <div class="description">
+            <span>${$(desc.find('h3 span')[0]).html()}</span>
+            <p>${$(desc.find('h2')[0]).html()}</p>
+          </div>
+        </div>
+      `
+    }
+  })
+  otherNews += '</div>'
+
+  if (newsButtons.length > 1) {
+    newsContainer.append(otherNews)
+  }
+
+  newsContainer.append(bigNews)
+}
+
 $(window).ready(() => {
   initMenu()
+  initNews()
   initMore()
   initSub()
 })
@@ -342,7 +390,7 @@ const onBeforeClone = className => {
     document.querySelector(`button[data-sub="${className}"]`).click()
   }
 
-  setTimeout(() => sub.scrollIntoView(), 500)
+  //setTimeout(() => sub.scrollIntoView(), 500)
 
   const bt = sub.querySelector(`.menu button:not(.title)`)
   const clone = bt.cloneNode(true)
@@ -389,6 +437,6 @@ window.onRemove = removedElement => {
   }
 }
 
-window.sabo_elements = [...$('.member').get(), ...$('.title-line').get()]
+window.sabo_elements = () => [...$('.member').get(), ...$('.title-line').get()]
 
 window.ready = true
