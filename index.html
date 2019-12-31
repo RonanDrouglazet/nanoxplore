@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q=" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
 </head>
@@ -806,9 +807,8 @@ He is co-inventor of 18 patents focused on emulation systems and reprogrammable 
                   </div>
                 </div>
               </div>
-              <p data-sabo-id="686">En pleine expansion, nous recherchons constamment à renforcer ses équipes de développement software et hardware, à Paris
-              ou Montpellier. Vous souhaitez rejoindre NanoXplore et proposer une candidature spontanée, contactez dès à présent notre
-              service RH par email : <a href="mailto:careers@nanoxplore.com" target="_blank" data-sabo-id="687">careers@nanoxplore.com</a></p>
+              <p data-sabo-id="686">In full expansion, we are constantly looking to strengthen its software and hardware development teams, in Paris or
+              Montpellier. You wish to join NanoXplore and propose a spontaneous application, contact our HR department by email now: <a href="mailto:careers@nanoxplore.com" target="_blank" data-sabo-id="687">careers@nanoxplore.com</a></p>
               <a href="#contact" data-sabo-id="688"><button class="learn-more" data-sabo-id="689">contact us</button></a>
             </div>
           </div>
@@ -951,13 +951,17 @@ He is co-inventor of 18 patents focused on emulation systems and reprogrammable 
             </div>
           </div>
         </div>
-        <form data-sabo-id="547">
+        <form data-sabo-id="547" data-action="//octoboot.ovh/email/NanoXplore%20website%3Coctoboot@gmail.com%3E/ronan.drouglazet@gmail.com/contact">
           <h2 data-sabo-id="548">Leave us a message</h2>
           <input id="name" class="middle" name="name" placeholder="Your name..." type="text" data-sabo-id="549">
           <input id="email" class="middle" name="email" placeholder="Your email..." type="text" data-sabo-id="550">
           <input id="subject" name="subject" placeholder="Subject..." type="text" data-sabo-id="551">
           <textarea id="description" name="description" placeholder="Write your message here..." rows="12" data-sabo-id="552"></textarea>
-          <button class="learn-more" data-sabo-id="553">SEND</button>
+          <div class="actions" data-sabo-id="690">
+            <div class="g-recaptcha" data-sitekey="6LcgByUUAAAAABCqVO6lR0ePcJw8D2v0aQo8fx_T" data-sabo-id="691"></div>
+            <button id="submit" class="learn-more" data-sabo-id="553">SEND</button>
+          </div>
+          <div class="ui negative message" data-sabo-id="692"></div>
         </form>
       </div>
     </section>

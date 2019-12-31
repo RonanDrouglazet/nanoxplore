@@ -183,11 +183,57 @@ const initNews = () => {
   newsContainer.append(bigNews)
 }
 
+const initForm = () => {
+  $('#contact form').on('submit', function(e) {
+    e.preventDefault()
+    var $el = $(this),
+      $alert = $el.find('.ui.message'),
+      $submit = $el.find('#submit'),
+      action = $el.attr('data-action')
+    $alert.removeClass('negative positive')
+    $alert.html('')
+
+    if (
+      !$el.find('input#name').val() ||
+      !$el.find('input#email').val() ||
+      !$el.find('input#subject').val() ||
+      !$el.find('textarea#description').val()
+    ) {
+      $alert.html('All fields are required')
+      $alert.addClass('negative').fadeIn(500)
+      return
+    }
+
+    $submit.html('<i class="large notched circle loading icon"></i>')
+
+    $.ajax({
+      type: 'POST',
+      url: action,
+      data: $el.serialize(),
+      //eslint-disable-next-line
+      success: function(response) {
+        if (response.status == 'error') {
+          $alert.html(
+            "An error occured, check all fields and don't forget the captcha validation"
+          )
+          $alert.addClass('negative').fadeIn(500)
+        } else {
+          $el.trigger('reset')
+          $alert.html('Your message has been sent')
+          $alert.addClass('positive').fadeIn(500)
+        }
+        $submit.html('send')
+      },
+    })
+  })
+}
+
 $(window).ready(() => {
   initMenu()
   initNews()
   initMore()
   initSub()
+  initForm()
 })
 
 let map

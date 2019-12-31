@@ -722,7 +722,6 @@ section.contact .content > .title-line {
 
 section.contact form {
   width: 100%;
-  height: 570px;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
   padding: 30px 40px;
   text-align: left;
@@ -736,6 +735,15 @@ section.contact form button {
 
 section.contact form h2 {
   margin-bottom: 20px;
+}
+
+section.contact form .ui.message {
+  display: none;
+}
+
+section.contact form .actions {
+  display: flex;
+  justify-content: space-between;
 }
 
 section.contact input,
