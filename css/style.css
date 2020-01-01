@@ -676,6 +676,12 @@ section.news {
   }
 }
 
+@media (max-width: 750px) {
+  .news .news-container > div.news:not(.big) {
+    display: none;
+  }
+}
+
 .news .news-container .little {
   height: 33%;
   width: 85%;
