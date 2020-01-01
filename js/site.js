@@ -1,12 +1,12 @@
 const setButtonLineRect = rect =>
-  $('header .menu .button-line').css({
+  $('.header .menu .button-line').css({
     left: rect.left,
     width: rect.width,
     top: rect.top + rect.height,
   })
 
 const getMenuButtonFromSection = section =>
-  $(`header .menu .button[data-menu="${$(section).data('menu')}"]`).get(0)
+  $(`.header .menu .button[data-menu="${$(section).data('menu')}"]`).get(0)
 
 let currentPosition
 let timeoutPosition
@@ -40,7 +40,7 @@ const initMenu = () => {
     .forEach(section => observer.observe(section))
   observer.observe(document.querySelector('footer'))
 
-  $('header .menu .button[data-menu]').hover(
+  $('.header .menu .button[data-menu]').hover(
     function() {
       clearTimeout(timeoutPosition)
       setButtonLineRect(this.getBoundingClientRect())
@@ -53,9 +53,9 @@ const initMenu = () => {
     }
   )
 
-  $('header .menu .button').click(function() {
+  $('.header .menu .button').click(function() {
     const position =
-      $('section.' + $(this).data('menu')).offset().top - $('header').height()
+      $('section.' + $(this).data('menu')).offset().top - $('.header').height()
     scrollTo(0, position)
   })
 
@@ -113,6 +113,7 @@ const initMore = () => {
 const initSub = () => {
   $('.sub-content').each(function() {
     const sub = $(this)
+    let current = 0
     sub.find('.menu button:not(.title)').each(function(i) {
       if (i === 0) {
         $(this).addClass('active')
@@ -136,6 +137,21 @@ const initSub = () => {
           sub.css('height', height + 'px')
         }
       })
+    })
+    sub.find('.arrows i').click(function() {
+      const isLeft = $(this).hasClass('left')
+      const buttons = sub.find('.menu button:not(.title)')
+      if (isLeft) {
+        current--
+      } else {
+        current++
+      }
+      if (current < 0) {
+        current = buttons.length - 1
+      } else if (current == buttons.length) {
+        current = 0
+      }
+      buttons[current].click()
     })
   })
 }
@@ -228,8 +244,22 @@ const initForm = () => {
   })
 }
 
+const initMobileMenu = () => {
+  $('.header-mobile .menu').click(() =>
+    $('.header-mobile .menu-content').toggleClass('active')
+  )
+  $('.header-mobile .menu-content .button').click(function() {
+    const position =
+      $('section.' + $(this).data('menu')).offset().top -
+      $('.header-mobile').height()
+    scrollTo(0, position)
+    $('.header-mobile .menu-content').toggleClass('active')
+  })
+}
+
 $(window).ready(() => {
   initMenu()
+  initMobileMenu()
   initNews()
   initMore()
   initSub()

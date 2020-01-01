@@ -80,7 +80,7 @@ button.download:hover {
   background: white;
 }
 
-.arrow {
+.menu .arrow {
   width: 10px;
   height: 10px;
   border-top: 2px solid white;
@@ -106,6 +106,28 @@ button.download:hover {
 
 .sub-content .menu-container {
   z-index: 3;
+  margin-right: 20px;
+}
+
+@media (max-width: 750px) {
+  .sub-content .menu-container {
+    display: none;
+  }
+  .sub-content .description-container {
+    margin: 0 auto;
+  }
+  .sub-content .description .title-line {
+    margin: 10px auto 20px auto !important;
+  }
+  .sub-content .description h2:first-child {
+    text-align: center;
+  }
+  .sub-content .description-container .description {
+    padding: 0 10px;
+  }
+  .sub-content .description-container .arrows {
+    display: flex !important;
+  }
 }
 
 .sub-content .description-container {
@@ -113,6 +135,19 @@ button.download:hover {
   position: relative;
   height: fit-content;
   z-index: 2;
+}
+
+.sub-content .description-container .arrows {
+  display: flex;
+  display: none;
+  justify-content: space-between;
+  z-index: 1000000000;
+  position: relative;
+  top: 35px;
+}
+
+.sub-content .description-container .arrows i {
+  cursor: pointer;
 }
 
 .sub-content .description-container > .description {
@@ -143,6 +178,18 @@ span.adress a {
 .gmap-container .menu,
 .sub-content .menu {
   width: 280px;
+}
+
+@media (max-width: 750px) {
+  .gmap-container .menu {
+    width: 220px;
+  }
+  .gmap-container .menu button {
+    font-size: 12px !important;
+  }
+  .gmap-container .menu .title.button {
+    font-size: 16px !important;
+  }
 }
 
 .gmap-container .menu button,
@@ -240,6 +287,13 @@ span.adress a {
   overflow: hidden;
 }
 
+@media (max-width: 750px) {
+  .sub-content .member .pic {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .sub-content .member .pic img {
   width: 100%;
 }
@@ -260,11 +314,22 @@ span.adress a {
   text-align: left;
 }
 
+@media (max-width: 750px) {
+  .news-details-container {
+    margin: auto;
+  }
+
+  .news-details-container .pic {
+    width: 100% !important;
+  }
+}
+
 button:focus {
   outline: none;
 }
 
-header {
+.header,
+.header-mobile {
   height: 100px;
   width: 100%;
   position: fixed;
@@ -274,30 +339,74 @@ header {
   background: rgba(255, 255, 255, 0.8);
 }
 
+.header-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  display: none;
+}
+
+.header-mobile .menu-content {
+  height: 0;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  transition: height 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.header-mobile .menu-content .button {
+  padding: 10px 30px;
+  text-align: center;
+  color: black;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  border-top: 1px solid black;
+  width: 100%;
+}
+
+.header-mobile .menu-content.active {
+  height: 280px;
+}
+
+@media (max-width: 750px) {
+  .header {
+    display: none;
+  }
+  .header-mobile {
+    display: flex;
+  }
+}
+
 .content {
   max-width: 945px;
   margin: auto;
   width: 100%;
 }
 
-header .content {
+.header .content {
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-header .menu-container {
+.header .menu-container {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
 }
 
-header .logo img {
+.header .logo img,
+.header-mobile .logo img {
   height: 80px;
 }
 
-header .menu {
+.header .menu {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -309,29 +418,29 @@ header .menu {
   align-items: center;
 }
 
-header .menu .button {
+.header .menu .button {
   cursor: pointer;
 }
 
-header .menu .button:hover {
+.header .menu .button:hover {
   color: #be3a34;
 }
 
-header .menu .button-line {
+.header .menu .button-line {
   height: 3px;
   background: black;
   transition: left 0.5s ease-in-out, width 0.5s ease-in-out;
   position: absolute;
 }
 
-header .search.button {
+.header .search.button {
   width: 48px;
   height: 48px;
   background-image: url('../assets/img/loupe_b.svg');
   cursor: pointer;
 }
 
-header .search.button:hover {
+.header .search.button:hover {
   background-image: url('../assets/img/loupe.svg');
 }
 
@@ -343,6 +452,12 @@ section.welcome {
   background-position: 50%;
   position: relative;
   padding-top: 0;
+}
+
+@media (max-width: 750px) {
+  section.welcome {
+    max-height: 200vh;
+  }
 }
 
 .welcome .pusher {
@@ -364,9 +479,16 @@ section.welcome {
 
 .welcome .intro {
   width: 365px;
+  max-width: 100%;
   color: white;
   position: relative;
   z-index: 2;
+}
+
+@media (max-width: 400px) {
+  .welcome .intro {
+    padding: 0 15px;
+  }
 }
 
 .welcome .intro h1 {
@@ -401,12 +523,20 @@ section.company {
   color: #1b1b1b;
 }
 
+@media (max-width: 500px) {
+  .company > .content > p {
+    width: 90%;
+    text-align: justify;
+    margin: auto;
+  }
+}
+
 .company .learn-more {
   margin-top: 20px;
 }
 
 section.products:not(.sub) {
-  height: 500px;
+  min-height: 500px;
   background-image: url('../assets/img/PRODUCT-V2-FINAL.jpg');
   background-size: cover;
   background-position: 50%;
@@ -421,6 +551,7 @@ section.products:not(.sub) .title-line {
 
 .products:not(.sub) .products-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -428,6 +559,13 @@ section.products:not(.sub) .title-line {
 .products:not(.sub) .product {
   width: 50%;
   padding: 50px;
+  min-width: 300px;
+}
+
+@media (max-width: 600px) {
+  .products:not(.sub) .product {
+    padding: 25px 0;
+  }
 }
 
 .products:not(.sub) .product p {
@@ -530,6 +668,12 @@ section.news {
 
 .news .news-container > div.news {
   width: 50%;
+}
+
+@media (max-width: 600px) {
+  .news .news-container > div.news {
+    width: 90%;
+  }
 }
 
 .news .news-container .little {
@@ -646,7 +790,7 @@ section.careers-sub .description.jobs .title-line {
 section.careers-sub .description.jobs .job {
   width: 280px;
   height: 240px;
-  background-image: url('../assets/img/job.png');
+  background-image: url('../assets/img/carreer_opening_400px.jpg');
   background-size: cover;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -658,6 +802,21 @@ section.careers-sub .description.jobs .job {
 section.careers-sub .description.jobs .job-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 750px) {
+  section.careers-sub .description.jobs .job-container {
+    align-items: center;
+    flex-direction: column;
+  }
+  section.careers-sub .description.jobs .job {
+    max-width: 90%;
+    margin-top: 30px;
+  }
+  section.careers-sub .description.jobs .job-container.first {
+    margin-bottom: 0 !important;
+  }
 }
 
 section.careers-sub .description.jobs .job-container.first {
@@ -722,6 +881,8 @@ section.contact .content > .title-line {
 
 section.contact form {
   width: 100%;
+  max-width: 80vw;
+  margin: auto;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
   padding: 30px 40px;
   text-align: left;
@@ -744,6 +905,7 @@ section.contact form .ui.message {
 section.contact form .actions {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 section.contact input,
@@ -766,17 +928,14 @@ section.contact input {
 }
 
 section.contact input.middle {
-  width: 48.3%;
-}
-
-section.contact input.middle:first-of-type {
-  margin-right: 25px;
+  width: 49.5%;
 }
 
 section.contact .contact-container,
 section.contact .left,
 section.contact .right {
   display: flex;
+  flex-wrap: wrap;
 }
 
 section.contact .contact-container {
@@ -801,6 +960,65 @@ section.contact .adress.border {
   border-right: 1px solid #e6e6e6;
 }
 
+@media (max-width: 510px) {
+  section.contact .left .logo {
+    width: 100%;
+    text-align: center;
+  }
+
+  section.contact .adress {
+    width: 50%;
+    padding: 30px 4%;
+    margin: 0;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  section.contact .contact-container .title-line {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  section.contact .right {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  section.contact form {
+    width: 80%;
+    margin: 0 10%;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    text-align: left;
+    border-bottom: 4px solid #be3a34;
+  }
+}
+
+@media (max-width: 480px) {
+  section.contact input.middle {
+    width: 49%;
+  }
+}
+
+@media (max-width: 428px) {
+  section.contact form {
+    width: 90%;
+    margin: 0 5%;
+    padding: 10px 10px;
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 354px) {
+  section.contact form {
+    width: 100%;
+    margin: 0;
+    padding: 10px 10px;
+    max-width: 100vw;
+  }
+}
+
 section.contact .emails {
   margin-top: 30px;
   margin-left: 40px;
@@ -814,8 +1032,7 @@ section.contact .emails span {
 }
 
 footer {
-  padding-top: 50px;
-  height: 330px;
+  padding: 50px 10px 0 10px;
   background-color: #be3a34;
   color: white;
 }
@@ -825,14 +1042,26 @@ footer .content {
 }
 
 footer .main {
-  height: 90%;
+  min-height: 90%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
+footer .main .logo {
+  width: 50%;
+  max-width: 240px;
+}
+
+footer .main .logo img {
+  max-width: 100%;
+}
+
 footer .main .contact {
-  width: 490px;
+  width: 50%;
   display: flex;
+  min-width: 286px;
+  margin-left: 10px;
 }
 
 footer .contact-description {
@@ -848,8 +1077,29 @@ footer .main .title-line {
 }
 
 footer .content .credits {
+  margin-top: 80px;
   align-self: flex-end;
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+@media (max-width: 541px) {
+  footer .main {
+    justify-content: center;
+  }
+  footer .main .contact {
+    width: 90%;
+    align-items: center;
+  }
+}
+
+@media (max-width: 450px) {
+  footer .main .logo {
+    width: 90%;
+  }
+
+  footer .content .credits {
+    font-size: 9px;
+  }
 }
