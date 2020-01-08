@@ -81,11 +81,8 @@ button.download:hover {
 }
 
 .menu .arrow {
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid white;
-  border-right: 2px solid white;
-  transform: rotate(45deg);
+  width: 14px;
+  height: 14px;
 }
 
 .title-line {
@@ -241,7 +238,13 @@ span.adress a {
 .sub-content .menu button:not(.title):hover .arrow,
 .gmap-container .menu button:not(.title).active .arrow,
 .sub-content .menu button:not(.title).active .arrow {
-  border-color: #be3a34;
+  /*
+    https://css-tricks.com/change-color-of-svg-on-hover/
+    https://stackoverflow.com/questions/42966641/how-to-transform-black-into-any-given-color-using-only-css-filters/43960991#43960991
+    https://codepen.io/sosuke/pen/Pjoqqp
+  */
+  filter: brightness(0) saturate(100%) invert(20%) sepia(39%) saturate(4587%)
+    hue-rotate(346deg) brightness(108%) contrast(78%);
 }
 
 .gmap-container .menu .menu button.title,

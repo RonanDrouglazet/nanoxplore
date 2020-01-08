@@ -331,7 +331,7 @@ const loadMap = data => {
         continent +
         '">' +
         continent +
-        '<div class="arrow"></div></button>'
+        '<img src="assets/img/menu_arrow_white.svg" class="arrow" /></button>'
     )
   }
 
