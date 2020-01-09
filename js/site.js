@@ -100,14 +100,12 @@ const initMore = () => {
         button.get(0).scrollIntoView()
       }
 
-      if (location.href.match('/admin')) {
-        if (shouldClose) {
-          clearInterval(sub.get(0).heightInterval)
-        } else {
-          sub.get(0).heightInterval = setInterval(() => {
-            sub.css('height', height() + 'px')
-          }, 1000)
-        }
+      if (shouldClose) {
+        clearInterval(sub.get(0).heightInterval)
+      } else {
+        sub.get(0).heightInterval = setInterval(() => {
+          sub.css('height', height() + 'px')
+        }, 1000)
       }
     })
   })
