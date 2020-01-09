@@ -441,10 +441,51 @@ button:focus {
   height: 48px;
   background-image: url('../assets/img/loupe_b.svg');
   cursor: pointer;
+  position: relative;
 }
 
 .header .search.button:hover {
   background-image: url('../assets/img/loupe.svg');
+}
+
+.header .search-content {
+  display: none;
+  position: relative;
+  top: 26px;
+  right: 200px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  width: min-content;
+}
+
+.header #search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 240px;
+}
+
+.header #search-result span {
+  margin-left: 5px;
+}
+
+.header #search-result i {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.header #search-result i:hover {
+  opacity: 1;
+}
+
+.header .search-content input {
+  border: none;
+  padding: 5px;
+}
+
+.header .search-container {
+  width: 48px;
+  height: 48px;
 }
 
 section.welcome {

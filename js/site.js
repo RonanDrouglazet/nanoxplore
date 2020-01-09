@@ -54,9 +54,13 @@ const initMenu = () => {
   )
 
   $('.header .menu .button').click(function() {
-    const position =
-      $('section.' + $(this).data('menu')).offset().top - $('.header').height()
-    scrollTo(0, position)
+    const section = $('section.' + $(this).data('menu'))
+    if (section.length) {
+      const position =
+        $('section.' + $(this).data('menu')).offset().top -
+        $('.header').height()
+      scrollTo(0, position)
+    }
   })
 
   $(window).on('resize', () => {
@@ -92,7 +96,7 @@ const initMore = () => {
       sub.css('padding-top', shouldClose ? 0 : padding + 'px')
       sub.css('padding-bottom', shouldClose ? 0 : padding + 'px')
 
-      if (!shouldClose) {
+      if (!shouldClose && !window.search) {
         button.get(0).scrollIntoView()
       }
 
@@ -100,10 +104,9 @@ const initMore = () => {
         if (shouldClose) {
           clearInterval(sub.get(0).heightInterval)
         } else {
-          sub.get(0).heightInterval = setInterval(
-            () => sub.css('height', height() + 'px'),
-            1000
-          )
+          sub.get(0).heightInterval = setInterval(() => {
+            sub.css('height', height() + 'px')
+          }, 1000)
         }
       }
     })
@@ -257,6 +260,146 @@ const initMobileMenu = () => {
   })
 }
 
+const textNodes = (function() {
+  const walk = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  )
+  const nodes = []
+  let node
+
+  while ((node = walk.nextNode())) {
+    if (node.textContent.trim().length > 1) {
+      nodes.push(node)
+    }
+  }
+  return nodes
+})()
+
+const higlightText = (node, text) => {
+  const range = document.createRange()
+  const index = node.textContent.toLowerCase().indexOf(text.toLowerCase())
+  range.setStart(node, index)
+  range.setEnd(node, index + text.length)
+  const selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range)
+}
+
+const initSearchButton = () => {
+  let toggle = false
+  let current = 1
+  let searchValue = ''
+  let searchResult = []
+
+  const scrollToCurrentElement = () => {
+    const currentNode = searchResult[current - 1]
+    const subContentParent = $(currentNode.parentElement).parents(
+      '.sub-content'
+    )
+    const descriptionParent = $(currentNode.parentElement)
+      .parents('.description')
+      .last()
+    const below =
+      !!subContentParent.length &&
+      subContentParent.offset().top - 150 < document.scrollingElement.scrollTop
+    let opening = false
+
+    if (subContentParent.length && !subContentParent.height()) {
+      const name = [...subContentParent.get(0).classList].filter(
+        _ => _ !== 'sub-content'
+      )[0]
+      window.search = true
+      $(`*[data-sub="${name}"]`)
+        .get(0)
+        .click()
+      window.search = false
+      opening = subContentParent
+    }
+
+    if (descriptionParent.length) {
+      const name = [...descriptionParent.get(0).classList].filter(
+        _ => !['description', 'active'].includes(_)
+      )[0]
+      const menuButton = $(`*[data-menu="${name}"]`)
+      if (!menuButton.hasClass('active')) {
+        menuButton.click()
+        opening = descriptionParent
+      }
+    }
+
+    if (opening) {
+      setTimeout(
+        () => {
+          document.scrollingElement.scrollTo({
+            top: subContentParent.offset().top - 150,
+            behavior: 'instant',
+          })
+        },
+        opening ? 100 : 0
+      )
+    }
+
+    if (opening) {
+      opening.one(
+        'transitionend',
+        () =>
+          (document.scrollingElement.scrollTop =
+            $(currentNode.parentElement).offset().top - 150)
+      )
+    } else {
+      document.scrollingElement.scrollTop =
+        $(currentNode.parentElement).offset().top - 150
+    }
+
+    higlightText(currentNode, searchValue)
+  }
+
+  const boundCurrent = () => {
+    if (current > searchResult.length) {
+      current = 1
+    } else if (!current) {
+      current = searchResult.length
+    }
+    $('#search-result-number').html(`${current}/${searchResult.length}`)
+  }
+
+  $('.header .button.search').click(() => {
+    if (toggle) {
+      $('.header .search-content').slideUp()
+    } else {
+      $('.header .search-content').slideDown()
+    }
+    toggle = !toggle
+  })
+
+  $('.header .search-content input').keydown(e => {
+    if (e.keyCode === 13) {
+      current = 1
+      searchValue = e.target.value
+      searchResult = textNodes.filter(
+        node => !!node.textContent.match(new RegExp(searchValue, 'i'))
+      )
+      $('#search-result-number').html(
+        `${searchResult.length ? 1 : 0}/${searchResult.length}`
+      )
+      scrollToCurrentElement()
+    }
+  })
+  $('.header .search-content i.down').click(() => {
+    current++
+    boundCurrent()
+    scrollToCurrentElement()
+  })
+  $('.header .search-content i.up').click(() => {
+    current--
+    boundCurrent()
+    scrollToCurrentElement()
+  })
+}
+
 $(window).ready(() => {
   initMenu()
   initMobileMenu()
@@ -264,6 +407,7 @@ $(window).ready(() => {
   initMore()
   initSub()
   initForm()
+  initSearchButton()
 })
 
 let map
