@@ -619,7 +619,8 @@ const onBeforeClone = className => {
 window.onClone = (clonedElement, useTemplate) => {
   const id = (Date.now() * Math.random()).toString().replace('.', '')
   const oldDescClass = clonedElement.getAttribute('data-menu')
-  clonedElement.innerHTML = 'Votre titre<div class="arrow"></div>'
+  clonedElement.innerHTML =
+    'Votre titre<img src="assets/img/menu_arrow_white.svg" class="arrow">'
   clonedElement.setAttribute('data-menu', id)
   if (clonedElement.classList.contains('active')) {
     Array.from(
