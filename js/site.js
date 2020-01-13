@@ -629,37 +629,37 @@ window.sabo_help = [
     name: 'Ajouter / Editer sales',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/ajout_sales.mp4',
+    video: '/help/ajout_sales.mp4',
   },
   {
     name: 'Ajouter / Editer news',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/ajout_news.mp4',
+    video: '/help/ajouter_news.mp4',
   },
   {
     name: 'Ajouter / Editer produit',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/ajouter_produit.mp4',
+    video: '/help/ajouter_produit.mp4',
   },
   {
     name: 'Fonction restaurer',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/fonction_restaurer.mp4',
+    video: '/help/fonction_restaurer.mp4',
   },
   {
     name: 'Modifier une image',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/modifier_image.mp4',
+    video: '/help/modifier_image.mp4',
   },
   {
     name: 'Modifier du texte',
     type: 'video',
     icon: 'mdi-video',
-    video: '/admin/help/modifier_texte.mp4',
+    video: '/help/modifier_texte.mp4',
   },
 ]
 
