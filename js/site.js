@@ -583,6 +583,28 @@ window.sabo_plugins = [
     },
   },
   {
+    name: 'Ajouter un job',
+    icon: 'mdi-account-multiple-plus',
+    type: 'library',
+    // eslint-disable-next-line
+    library: selectedFile => {
+      const sub = document.querySelector('.sub-content.careers')
+      if (!sub.offsetHeight) {
+        document.querySelector(`button[data-sub="careers"]`).click()
+      }
+      document.querySelector(`button[data-menu="jobs"]`).click()
+      const clone = document
+        .querySelector('.description.jobs .job.template')
+        .cloneNode(true)
+      clone.classList.remove('template')
+      clone.querySelector('a').href = selectedFile
+      document.querySelector('.job-container:not(.first)').appendChild(clone)
+      return {
+        addedNodes: [clone],
+      }
+    },
+  },
+  {
     name: 'Ajouter une news',
     icon: 'mdi-newspaper',
     type: 'exec',
@@ -599,6 +621,45 @@ window.sabo_plugins = [
     icon: 'mdi-cpu-64-bit',
     type: 'exec',
     exec: () => onBeforeClone('fgpa'),
+  },
+]
+
+window.sabo_help = [
+  {
+    name: 'Ajouter / Editer sales',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/ajout_sales.mp4',
+  },
+  {
+    name: 'Ajouter / Editer news',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/ajout_news.mp4',
+  },
+  {
+    name: 'Ajouter / Editer produit',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/ajouter_produit.mp4',
+  },
+  {
+    name: 'Fonction restaurer',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/fonction_restaurer.mp4',
+  },
+  {
+    name: 'Modifier une image',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/modifier_image.mp4',
+  },
+  {
+    name: 'Modifier du texte',
+    type: 'video',
+    icon: 'mdi-video',
+    video: '/admin/help/modifier_texte.mp4',
   },
 ]
 
@@ -656,6 +717,10 @@ window.onRemove = removedElement => {
   }
 }
 
-window.sabo_elements = () => [...$('.member').get(), ...$('.title-line').get()]
+window.sabo_elements = () => [
+  ...$('.member').get(),
+  ...$('.title-line').get(),
+  ...$('.job').get(),
+]
 
 window.ready = true
