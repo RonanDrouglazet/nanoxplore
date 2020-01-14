@@ -585,9 +585,9 @@ window.sabo_plugins = [
   {
     name: 'Ajouter un job',
     icon: 'mdi-account-multiple-plus',
-    type: 'library',
+    type: 'selectFile',
     // eslint-disable-next-line
-    library: selectedFile => {
+    selectFile: selectedFile => {
       const sub = document.querySelector('.sub-content.careers')
       if (!sub.offsetHeight) {
         document.querySelector(`button[data-sub="careers"]`).click()
@@ -599,10 +599,12 @@ window.sabo_plugins = [
       clone.classList.remove('template')
       clone.querySelector('a').href = selectedFile
       document.querySelector('.job-container:not(.first)').appendChild(clone)
+      document.body.parentElement.scrollTop = clone.getBoundingClientRect().top
       return {
         addedNodes: [clone],
       }
     },
+    selectFileExtensions: ['.pdf'],
   },
   {
     name: 'Ajouter une news',
