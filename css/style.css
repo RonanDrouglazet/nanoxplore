@@ -824,6 +824,10 @@ section.careers .title-line.secondary {
   margin-left: 0;
 }
 
+section.careers .learn-more {
+  margin-bottom: 1em;
+}
+
 section.careers-sub {
   padding: 0;
 }

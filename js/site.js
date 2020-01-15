@@ -14,7 +14,8 @@ let timeoutPosition
 const initMenu = () => {
   const observed = []
   const getObserved = target =>
-    observed.find(_ => _.target === target) || observed.push({ target })
+    observed.find(_ => _.target === target) ||
+    (observed.push({ target }) && target)
   const getBiggest = () =>
     observed.reduce((acc, curr) =>
       !acc || curr.vheight > acc.vheight ? curr : acc
@@ -57,9 +58,13 @@ const initMenu = () => {
     const section = $('section.' + $(this).data('menu'))
     if (section.length) {
       const position =
-        $('section.' + $(this).data('menu')).offset().top -
+        section.get(0).getBoundingClientRect().top +
+        (document.scrollingElement.scrollTop || document.body.scrollTop) -
         $('.header').height()
-      scrollTo(0, position)
+
+      ;[document.scrollingElement, document.body].forEach(_ =>
+        _.scrollTo(0, position)
+      )
     }
   })
 
@@ -459,8 +464,6 @@ const centerOn = continent => {
     })
     return marker
   })
-  /*new MarkerClusterer(map, markers,
-            { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })*/
 
   map.setCenter(continent)
   map.setZoom(continent.zoom)

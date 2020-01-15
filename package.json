@@ -1,0 +1,29 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "babel js/site.js --out-file js/site.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonanDrouglazet/nanoxplore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RonanDrouglazet/nanoxplore/issues"
+  },
+  "homepage": "https://github.com/RonanDrouglazet/nanoxplore#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babel-preset-minify": "^0.5.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "core-js": "^2.6.11"
+  }
+}
