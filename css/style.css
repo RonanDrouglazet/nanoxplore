@@ -455,7 +455,7 @@ button:focus {
   right: 200px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.8);
-  width: min-content;
+  width: 260px;
 }
 
 .header #search-result {
