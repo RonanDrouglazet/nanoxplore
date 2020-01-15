@@ -62,8 +62,8 @@ const initMenu = () => {
         (document.scrollingElement.scrollTop || document.body.scrollTop) -
         $('.header').height()
 
-      ;[document.scrollingElement, document.body].forEach(_ =>
-        _.scrollTo(0, position)
+      ;[document.scrollingElement, document.body].forEach(
+        _ => (_.scrollTop = position)
       )
     }
   })
@@ -336,10 +336,13 @@ const initSearchButton = () => {
     if (opening) {
       setTimeout(
         () => {
-          document.scrollingElement.scrollTo({
-            top: subContentParent.offset().top - 150,
-            behavior: 'instant',
-          })
+          document.scrollingElement.scrollTo
+            ? document.scrollingElement.scrollTo({
+                top: subContentParent.offset().top - 150,
+                behavior: 'instant',
+              })
+            : (document.scrollingElement.scrollTop =
+                subContentParent.offset().top - 150)
         },
         opening ? 100 : 0
       )
