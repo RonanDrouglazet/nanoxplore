@@ -706,7 +706,7 @@ section.news {
 .news .news-container {
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: center;
   padding-top: 50px;
 }
 
