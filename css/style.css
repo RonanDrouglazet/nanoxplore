@@ -741,8 +741,8 @@ section.news {
 .news .news-container .little .image {
   width: 100px;
   height: 100px;
-  background: black;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: 50%;
 }
 
