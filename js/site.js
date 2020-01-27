@@ -124,6 +124,9 @@ const initSub = () => {
       if (i === 0) {
         $(this).addClass('active')
         $('.description.' + $(this).attr('data-menu')).addClass('active')
+      } else {
+        $(this).removeClass('active')
+        $('.description.' + $(this).attr('data-menu')).removeClass('active')
       }
       $(this).attr('data-sabo-clone', 'onClone')
       $(this).attr('data-sabo-remove', 'onRemove')
@@ -180,10 +183,13 @@ const initNews = () => {
   `
 
   let otherNews = '<div class="news">'
-  newsButtons.each((i, button) => {
-    const desc = $(`.description.${$(button).data('menu')}`)
-    if (i != 0) {
-      otherNews += `
+  newsButtons
+    .get()
+    .slice(0, 4)
+    .forEach((button, i) => {
+      const desc = $(`.description.${$(button).data('menu')}`)
+      if (i != 0) {
+        otherNews += `
         <div class="little">
           <div class="image" style="background-image: url('${$(
             desc.find('img')[0]
@@ -194,8 +200,8 @@ const initNews = () => {
           </div>
         </div>
       `
-    }
-  })
+      }
+    })
   otherNews += '</div>'
 
   if (newsButtons.length > 1) {
